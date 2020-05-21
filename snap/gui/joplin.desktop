@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Joplin
+Comment=The free and private note taking app
+Exec=joplin-james-carroll.joplin
+Icon=${SNAP}/meta/gui/joplin.png
+Type=Application
+Categories=Office;

@@ -1,0 +1,61 @@
+name: joplin-james-carroll
+base: core18
+summary: A free, private note taking and to-do app!
+description: |
+  Joplin is an open source, free note taking application. Designed to be capable of replacing Evernote, Joplin is privacy conscious and can be be used without signing up for an account, but optionally supports synchronising your files with a file host of your choice and with optional end to end encryption.
+  
+  Developer site: https://joplinapp.org/
+  
+  Snap build: https://github.com/MrCarroll/joplin-snap
+grade: stable
+confinement: strict
+license: MIT
+adopt-info: joplin
+
+parts:
+  joplin:
+    plugin: nodejs
+    nodejs-version: '12.16.3'
+    nodejs-package-manager: 'npm'
+    source: https://github.com/laurent22/joplin.git
+    source-tag: 'v1.0.201'
+    build-environment:
+      - npm_config_unsafe_perm: 'true'
+      - SUDO_UID: '0'
+      - SUDO_GID: '0'
+      - SUDO_USER: 'root'
+      - npm_config_prefer_offline: 'true'
+      - PATH: $PATH:/root/parts/joplin/npm/bin
+    build-packages:
+      - python
+    override-pull: |
+      snapcraftctl pull
+      snapcraftctl set-version "$(git rev-parse --short HEAD)"
+      sed -i '/function checkForUpdates/a return;' ElectronClient/checkForUpdates.js
+    override-build: |
+      npm install
+      cd ElectronClient
+      npm run dist
+      cp -r $SNAPCRAFT_PART_BUILD/ElectronClient/dist/linux-unpacked/ $SNAPCRAFT_PART_INSTALL/
+    override-prime: |
+      snapcraftctl prime
+    stage-packages:
+      - libxss1
+      - libnspr4
+      - libnss3
+      - libglu1-mesa
+
+apps:
+  joplin:
+    command: joplin --no-sandbox
+    plugs:
+      - network
+      - browser-support
+      - opengl
+      - desktop
+      - desktop-legacy
+      - wayland
+      - x11
+      - home
+      - removable-media
+    extensions: [gnome-3-28]
