@@ -18,7 +18,7 @@ parts:
     nodejs-version: '12.16.3'
     nodejs-package-manager: 'npm'
     source: https://github.com/laurent22/joplin.git
-    source-tag: 'v1.0.214'
+    source-tag: 'v1.0.216'
     build-environment:
       - npm_config_unsafe_perm: 'true'
       - SUDO_UID: '0'
