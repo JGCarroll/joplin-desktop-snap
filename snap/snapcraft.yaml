@@ -44,6 +44,7 @@ parts:
       - libnspr4
       - libnss3
       - libglu1-mesa
+      - libnotify-bin
 
 apps:
   joplin:
