@@ -27,7 +27,7 @@ parts:
       - SUDO_GID: '0'
       - SUDO_USER: 'root'
       - npm_config_prefer_offline: 'true'
-      - PATH: $PATH:/root/parts/joplin/npm/bin
+      - PATH: $PATH:$SNAPCRAFT_PROJECT_DIR/parts/joplin/npm/bin
     build-packages:
       - python
     override-pull: |
