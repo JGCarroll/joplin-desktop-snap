@@ -1,3 +1,5 @@
+[![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/joplin-james-carroll)
+
 This repository contains the snapcraft build files that generate a function snap build of Joplin. Precompiled binaries can be downloaded at https://snapcraft.io/joplin-james-carroll or via `sudo snap install joplin-james-carroll`
 
 Due to the nature of the Snap sandbox, the webclipper functionality is unlikely to work for the foreseeable future.
