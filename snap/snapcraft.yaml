@@ -30,6 +30,7 @@ parts:
       - PATH: $PATH:$SNAPCRAFT_PROJECT_DIR/parts/joplin/npm/bin
     build-packages:
       - python
+      - rsync
     override-pull: |
       snapcraftctl pull
       snapcraftctl set-version "$(git rev-parse --short HEAD)"
