@@ -11,11 +11,13 @@ grade: stable
 confinement: strict
 license: MIT
 adopt-info: joplin
+architectures:
+  - build-on: amd64
 
 parts:
   joplin:
     plugin: nodejs
-    nodejs-version: '12.16.3'
+    nodejs-version: '12.18.0'
     nodejs-package-manager: 'npm'
     source: https://github.com/laurent22/joplin.git
     source-tag: 'v1.0.216'

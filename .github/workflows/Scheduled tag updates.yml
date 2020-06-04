@@ -1,0 +1,33 @@
+name: Automatically check for upstream releases
+on:
+  schedule:
+   - cron: "0 22 * * 2"
+jobs:
+  Update-Tag:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+      with:
+        persist-credentials: false
+    - name: Check for and apply latest stable tag
+      run: |
+        curTag=$(grep 'source-tag:' snap/snapcraft.yaml | awk '/source-tag/ {print $2}')
+        latestTag=$(curl https://api.github.com/repos/laurent22/joplin/releases/latest | jq -r '.tag_name')
+        echo $curTag vs $latestTag
+        if [[ "${curTag:1:-1}" == "$latestTag" ]]
+        then
+          echo "The latest stable release and the source-tag property are aligned. There's nothing to do."
+        else
+          echo "The latest stable release and the source tag aren't aligned. Triggering a rebuild."
+          sed -i "s/$curTag/'$latestTag'/1" snap/snapcraft.yaml
+          git add snap/snapcraft.yaml
+          git config user.name "James Carroll"
+          git config user.email "eloquism@gmail.com"
+          git commit -m "auto: Update to $latestTag" -a
+        fi
+    - name: Push the commit
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.MRCARROLLTOKEN }}
+      # Use of my own token triggers a push event, that will send a push webhook to the Snapcraft build service
+      # Implicit use of ${{ secrets.GITHUB_TOKEN }} does not trigger other events.
