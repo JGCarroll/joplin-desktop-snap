@@ -11,7 +11,7 @@ jobs:
         persist-credentials: false
     - name: Check for and apply latest stable tag
       run: |
-        curTag=$(grep 'source-tag:' snap/snapcraft.yaml | awk '/source-tag/ {print $2}')
+        curTag=$(awk '/source-tag/ {print $2}' snap/snapcraft.yaml)
         latestTag=$(curl https://api.github.com/repos/laurent22/joplin/releases/latest | jq -r '.tag_name')
         echo $curTag vs $latestTag
         if [[ "${curTag:1:-1}" == "$latestTag" ]]
