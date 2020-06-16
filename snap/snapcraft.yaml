@@ -63,4 +63,5 @@ apps:
       - x11
       - home
       - removable-media
+      - password-manager-service
     extensions: [gnome-3-28]
