@@ -31,6 +31,7 @@ parts:
     build-packages:
       - python
       - rsync
+      - libsecret-1-dev
     override-pull: |
       snapcraftctl pull
       snapcraftctl set-version "$(git rev-parse --short HEAD)"
