@@ -17,7 +17,7 @@ architectures:
 parts:
   joplin:
     plugin: nodejs
-    nodejs-version: '12.18.0'
+    nodejs-version: '12.18.3'
     nodejs-package-manager: 'npm'
     source: https://github.com/laurent22/joplin.git
     source-tag: 'v1.0.227'
