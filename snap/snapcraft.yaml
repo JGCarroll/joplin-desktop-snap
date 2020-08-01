@@ -34,7 +34,7 @@ parts:
       - libsecret-1-dev
     override-pull: |
       snapcraftctl pull
-      snapcraftctl set-version "$(git rev-parse --short HEAD)"
+      snapcraftctl set-version "$(git describe --tags)"
       sed -i '/function checkForUpdates/a return;' ElectronClient/checkForUpdates.js
     override-build: |
       npm install
