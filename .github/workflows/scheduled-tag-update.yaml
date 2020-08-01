@@ -6,7 +6,7 @@ jobs:
   Update-Tag:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
+    - uses: actions/checkout@main
       with:
         persist-credentials: false
     - name: Check for and apply latest stable tag
