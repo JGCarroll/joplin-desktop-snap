@@ -48,7 +48,7 @@ parts:
       - libnspr4
       - libnss3
       - libglu1-mesa
-      - libnotify-bin
+      - libnotify4
       - libpulse0
 
 apps:
