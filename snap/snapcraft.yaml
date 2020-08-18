@@ -49,6 +49,7 @@ parts:
       - libnss3
       - libglu1-mesa
       - libnotify-bin
+      - libpulse0
 
 apps:
   joplin:
@@ -64,4 +65,6 @@ apps:
       - home
       - removable-media
       - password-manager-service
+      - pulseaudio
+      - audio-playback
     extensions: [gnome-3-28]
