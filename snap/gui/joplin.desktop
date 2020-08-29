@@ -5,3 +5,4 @@ Exec=joplin-james-carroll.joplin
 Icon=${SNAP}/meta/gui/joplin.png
 Type=Application
 Categories=Office;
+StartupWMClass=Joplin

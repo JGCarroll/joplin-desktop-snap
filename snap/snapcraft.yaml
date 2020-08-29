@@ -60,6 +60,7 @@ apps:
       - opengl
       - desktop
       - desktop-legacy
+      - unity7
       - wayland
       - x11
       - home
