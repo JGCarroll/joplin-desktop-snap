@@ -69,3 +69,5 @@ apps:
       - pulseaudio
       - audio-playback
     extensions: [gnome-3-28]
+    environment:
+      DISABLE_WAYLAND: 1
