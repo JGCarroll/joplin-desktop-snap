@@ -32,6 +32,7 @@ parts:
       - python
       - rsync
       - libsecret-1-dev
+      - curl
     override-pull: |
       snapcraftctl pull
       snapcraftctl set-version "$(git describe --tags)"
