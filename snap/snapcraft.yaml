@@ -41,8 +41,6 @@ parts:
       cd ElectronClient
       npm run dist
       cp -r $SNAPCRAFT_PART_BUILD/ElectronClient/dist/linux-unpacked/ $SNAPCRAFT_PART_INSTALL/
-    override-prime: |
-      snapcraftctl prime
     stage-packages:
       - libxss1
       - libnspr4
