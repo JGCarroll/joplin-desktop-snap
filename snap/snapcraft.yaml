@@ -51,7 +51,7 @@ parts:
 
 apps:
   joplin:
-    command: joplin --no-sandbox
+    command: linux-unpacked/joplin --no-sandbox
     plugs:
       - network
       - browser-support
