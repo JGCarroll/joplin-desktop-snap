@@ -17,17 +17,17 @@ architectures:
 parts:
   joplin:
     plugin: nodejs
-    nodejs-version: '14.15.0'
+    nodejs-version: '14.15.1'
     nodejs-package-manager: 'npm'
     source: https://github.com/laurent22/joplin.git
-    source-tag: 'v1.3.18'
+    source-tag: 'v1.4.12'
+    source-depth: 1
     build-environment:
       - npm_config_unsafe_perm: 'true'
       - SUDO_UID: '0'
       - SUDO_GID: '0'
       - SUDO_USER: 'root'
       - npm_config_prefer_offline: 'true'
-      - PATH: $PATH:$SNAPCRAFT_PROJECT_DIR/parts/joplin/npm/bin
     build-packages:
       - python
       - rsync
@@ -36,12 +36,14 @@ parts:
     override-pull: |
       snapcraftctl pull
       snapcraftctl set-version "$(git describe --tags)"
-      sed -i '/function checkForUpdates/a return;' ElectronClient/checkForUpdates.js
+      sed -i '/function checkForUpdates/a return;' packages/app-desktop/checkForUpdates.js
     override-build: |
+      export PATH=${SNAPCRAFT_PART_BUILD}/../npm/bin:${PATH}
       npm install
-      cd ElectronClient
+      cd packages/app-desktop
       npm run dist
-      cp -r $SNAPCRAFT_PART_BUILD/ElectronClient/dist/linux-unpacked/ $SNAPCRAFT_PART_INSTALL/
+      cp -r dist/linux-unpacked ${SNAPCRAFT_PART_INSTALL}
+      mv ${SNAPCRAFT_PART_INSTALL}/linux-unpacked/@joplinapp-desktop ${SNAPCRAFT_PART_INSTALL}/linux-unpacked/joplin
     stage-packages:
       - libxss1
       - libnspr4
