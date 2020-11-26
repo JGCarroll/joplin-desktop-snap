@@ -51,6 +51,7 @@ parts:
       - libglu1-mesa
       - libnotify4
       - libpulse0
+      - libappindicator3-1
 
 apps:
   joplin:
@@ -72,3 +73,4 @@ apps:
     extensions: [gnome-3-28]
     environment:
       DISABLE_WAYLAND: 1
+      TMPDIR: ${XDG_RUNTIME_DIR}
