@@ -52,6 +52,18 @@ parts:
       - libnotify4
       - libpulse0
       - libappindicator3-1
+      
+  cleanup:
+    plugin: nil
+    build-snaps:
+      - core18
+      - gnome-3-28-1804
+    override-prime: |
+      set -eux
+      for snap in "core18" "gnome-3-28-1804"; do
+          cd "/snap/$snap/current" && find . -type f,l -exec rm -f "$SNAPCRAFT_PRIME/{}" \;
+      done
+    after: [joplin]
 
 apps:
   joplin:
