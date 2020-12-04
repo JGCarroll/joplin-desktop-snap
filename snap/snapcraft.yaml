@@ -65,6 +65,11 @@ parts:
       done
     after: [joplin]
 
+
+layout:
+  /usr/share/libdrm:
+    bind: $SNAP/usr/share/libdrm
+
 apps:
   joplin:
     command: linux-unpacked/joplin --no-sandbox
