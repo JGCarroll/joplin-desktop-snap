@@ -37,6 +37,7 @@ parts:
       snapcraftctl pull
       snapcraftctl set-version "$(git describe --tags)"
       sed -i '/function checkForUpdates/a return;' packages/app-desktop/checkForUpdates.js
+      sed -i '/execute: async/ a alert("This instance of Joplin is in a snap package. Please use the official AppImages for development purposes"); \n return;' packages/app-desktop/commands/copyDevCommand.ts
     override-build: |
       export PATH=${SNAPCRAFT_PART_BUILD}/../npm/bin:${PATH}
       npm install
