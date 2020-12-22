@@ -1,14 +1,14 @@
 name: Automatically check for upstream releases
 on:
   schedule:
-   - cron: "0 22 * * 2"
+   - cron: "0 20 * * *"
 jobs:
   Update-Tag:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@main
       with:
-        persist-credentials: false
+        token: ${{ secrets.MRCARROLLTOKEN }}
     - name: Check for and apply latest stable tag
       run: |
         curTag=$(awk '/source-tag/ {print $2}' snap/snapcraft.yaml)
@@ -23,11 +23,7 @@ jobs:
           git add snap/snapcraft.yaml
           git config user.name "James Carroll"
           git config user.email "eloquism@gmail.com"
-          git commit -m "auto: Update to $latestTag" -a
+          git commit -m "auto: Update to $latestTag"
+          git push
         fi
-    - name: Push the commit
-      uses: ad-m/github-push-action@master
-      with:
-        github_token: ${{ secrets.MRCARROLLTOKEN }}
-      # Use of my own token triggers a push event, that will send a push webhook to the Snapcraft build service
-      # Implicit use of ${{ secrets.GITHUB_TOKEN }} does not trigger other events.
+
