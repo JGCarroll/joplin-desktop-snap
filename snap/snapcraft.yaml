@@ -88,6 +88,7 @@ apps:
       - password-manager-service
       - pulseaudio
       - audio-playback
+      - cups-control
     extensions: [gnome-3-28]
     environment:
       DISABLE_WAYLAND: 1
