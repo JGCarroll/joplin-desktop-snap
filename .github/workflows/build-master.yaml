@@ -1,0 +1,21 @@
+name: Nightly builds
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: snapcore/action-build@v1
+      id: build
+    - uses: snapcore/action-publish@v1
+      with:
+        store_login: ${{ secrets.STORE_LOGIN }}
+        snap: ${{ steps.build.outputs.snap }}
+        release: candidate
+    - uses: actions/upload-artifact@v2
+      with:
+        name: 'snap'
+        path: ${{ steps.build.outputs.snap}}
