@@ -1,4 +1,4 @@
-name: Nightly builds
+name: Build master/HEAD on push event
 on:
   push:
     branches:
