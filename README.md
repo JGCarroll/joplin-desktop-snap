@@ -30,8 +30,8 @@ This is unfortunately a complex problem between font caches and container enviro
 See [here](https://forum.snapcraft.io/t/snapped-app-not-loading-fonts-on-fedora-and-arch/12484) for some background
 
 ## The snap cannot access data from a none snap install / Data is missing after removing the snap and I expected it to work with the AppImage
-Snaps cannot access hidden folders/files in the top level of $HOME. This means this snap cannot access `$HOME/.joplin`, the default location of the Joplin databases.
-The database is typically located in `$HOME/snap/joplin-james-carroll/current/.joplin`, and you should be able to copy this into `$HOME/.joplin` completely fine. You can also access this location by clicking "open profile directory" in the tools menu.
+Snaps cannot access hidden folders/files in the top level of $HOME. This means this snap cannot access `$HOME/.config/.joplin`, the default location of the Joplin databases.
+The database is typically located in `$HOME/snap/joplin-james-carroll/current/.config/.joplin`, and you should be able to copy this into `$HOME/.config/.joplin` completely fine. You can also access this location by clicking "open profile directory" in the tools menu.
 
 Alternatively, consider exporting the data or synchronising it instead.
 
@@ -44,7 +44,7 @@ If your expected editor is not showing in the dialogue, it's likely because it d
 
 The functionality in the settings to specificy an editor by file location will not work because the snap won't see any other editors due to the sandboxing.
 
-Effectively this means external editors like Gedit, vscode, Gimp, Pinta, etc, are likely to be fine; but CLI based such as Vim may not be possible without effort on the users side to create a .desktop file manually for it.
+Effectively this means external editors like Gedit, VSCode, Gimp, Pinta, etc, are likely to be fine; but CLI based such as Vim may not be possible without effort on the users side to create a .desktop file manually for it.
 
 ## ARM support
 Joplin does not officially have ARM support and I don't have the hardware to test it in an ARM environment sufficiently, so this snap is currently X84_64 only.
