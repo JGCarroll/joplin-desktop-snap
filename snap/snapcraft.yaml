@@ -13,6 +13,7 @@ license: MIT
 adopt-info: joplin
 architectures:
   - build-on: amd64
+compression: lzo
 
 parts:
   joplin:
