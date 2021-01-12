@@ -1,15 +1,13 @@
-name: Automatically check for upstream releases
+name: Automatically build upstream releases on schedule
 on:
   schedule:
    - cron: "0 20 * * *"
 jobs:
-  Update-Tag:
+  update:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@main
-      with:
-        token: ${{ secrets.MRCARROLLTOKEN }}
-    - name: Check for and apply latest stable tag
+    - uses: actions/checkout@v2
+    - name: Check for upstream releases
       run: |
         curTag=$(awk '/source-tag/ {print $2}' snap/snapcraft.yaml)
         latestTag=$(curl https://api.github.com/repos/laurent22/joplin/releases/latest | jq -r '.tag_name')
@@ -25,5 +23,19 @@ jobs:
           git config user.email "eloquism@gmail.com"
           git commit -m "auto: Update to $latestTag"
           git push
+          echo "should_build_snap=1" >> $GITHUB_ENV
         fi
-
+    - uses: snapcore/action-build@v1
+      id: build
+      if: ${{ env.should_build_snap }}
+    - uses: snapcore/action-publish@v1
+      if: ${{ env.should_build_snap }}
+      with:
+        store_login: ${{ secrets.STORE_LOGIN }}
+        snap: ${{ steps.build.outputs.snap }}
+        release: candidate
+    - uses: actions/upload-artifact@v2
+      if: ${{ env.should_build_snap }}
+      with:
+        name: 'snap'
+        path: ${{ steps.build.outputs.snap}}
