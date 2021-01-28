@@ -55,7 +55,9 @@ class PluginImpl(PluginV2):
 			"cd packages/app-desktop",
 			"npm run dist",
 			"cp -r dist/linux-unpacked ${SNAPCRAFT_PART_INSTALL}",
-			"mv ${SNAPCRAFT_PART_INSTALL}/linux-unpacked/@joplinapp-desktop ${SNAPCRAFT_PART_INSTALL}/linux-unpacked/joplin"
+			"mv ${SNAPCRAFT_PART_INSTALL}/linux-unpacked/@joplinapp-desktop ${SNAPCRAFT_PART_INSTALL}/linux-unpacked/joplin",
+			"mkdir -p ${SNAPCRAFT_PART_INSTALL}/meta/gui/icons/hicolor/scalable/apps/",
+			"cp ${SNAPCRAFT_PROJECT_DIR}/snap/gui/joplin.svg ${SNAPCRAFT_PART_INSTALL}/meta/gui/icons/hicolor/scalable/apps/snap.joplin-james-carroll.joplin.svg"
 		]
 
 	def get_build_commands(self) -> List[str]:
