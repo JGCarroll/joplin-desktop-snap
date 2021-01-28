@@ -2,7 +2,7 @@
 Name=Joplin
 Comment=The free and private note taking app
 Exec=joplin-james-carroll.joplin
-Icon=joplin-desktop
+Icon=snap.joplin-james-carroll.joplin
 Type=Application
 Categories=Office;
 StartupWMClass=Joplin
