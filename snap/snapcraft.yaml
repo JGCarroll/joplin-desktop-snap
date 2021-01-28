@@ -71,6 +71,8 @@ parts:
 layout:
   /usr/share/libdrm:
     bind: $SNAP/usr/share/libdrm
+  /usr/share/icons:
+    bind: $SNAP/meta/gui
 
 apps:
   joplin:
