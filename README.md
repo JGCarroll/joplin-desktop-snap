@@ -71,3 +71,8 @@ StartupWMClass=Joplin
 Terminal=false
 ```
 Note this will by default break the included Joplin icon, and Joplin will use a generic application icon if you are not using an icon theme that includes an icon for Joplin.
+
+To revert to the default application icon, delete the workaround as follows:
+```
+$ rm ~/.local/share/applications/joplin-james-carroll_joplin.desktop
+```
