@@ -49,7 +49,7 @@ Effectively this means external editors like Gedit, VSCode, Gimp, Pinta, etc, ar
 ## ARM support
 Joplin does not officially have ARM support and I don't have the hardware to test it in an ARM environment sufficiently, so this snap is currently X84_64 only.
 
-## The Application icon doesn't change with my icon theme
+## The application icon doesn't change with my icon theme
 
 If you are using an icon theme such as [`mint-y-icons`](https://github.com/linuxmint/mint-y-icons/) (e.g. on Linux Mint with the Cinnamon shell), in order for the shell to be able to replace the application icon, the `.desktop` file must use a "symbolic" reference for the icon name. Unfortunately, while `snapd` 2.42 and later do support symbolic icon names, distributions such as Debian and Solus still ship with older versions of `snapd`, so in order to maintain support for these users, the default `.desktop` for `joplin-snap` must still use an absolute path for the icon name, which precludes icon theming.
 
