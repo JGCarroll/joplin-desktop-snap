@@ -48,3 +48,26 @@ Effectively this means external editors like Gedit, VSCode, Gimp, Pinta, etc, ar
 
 ## ARM support
 Joplin does not officially have ARM support and I don't have the hardware to test it in an ARM environment sufficiently, so this snap is currently X84_64 only.
+
+## The Application icon doesn't change with my icon theme
+
+If you are using an icon theme such as [`mint-y-icons`](https://github.com/linuxmint/mint-y-icons/) (e.g. on Linux Mint with the Cinnamon shell), in order for the shell to be able to replace the application icon, the `.desktop` file must use a "symbolic" reference for the icon name. Unfortunately, while `snapd` 2.42 and later do support symbolic icon names, distributions such as Debian and Solus still ship with older versions of `snapd`, so in order to maintain support for these users, the default `joplin.desktop` for `joplin-snap` must still use an absolute path for the icon name, which precludes icon theming.
+
+As a workaround, you can create your own local `joplin.desktop` file at `~/.local/share/applications$ nano joplin-james-carroll_joplin.desktop`:
+```
+$ nano ~/.local/share/applications$ nano joplin-james-carroll_joplin.desktop
+```
+Then paste the following and save:
+```
+[Desktop Entry]
+X-SnapInstanceName=joplin-james-carroll
+Name=Joplin
+Comment=The free and private note taking app
+Exec=env BAMF_DESKTOP_FILE_HINT=/var/lib/snapd/desktop/applications/joplin-james-carroll_joplin.desktop /snap/bin/joplin-james-carroll.joplin
+Icon=joplin
+Type=Application
+Categories=Office;
+StartupWMClass=Joplin
+Terminal=false
+```
+Note this will by default break the included Joplin icon, and Joplin will use a generic application icon if you are not using an icon theme that includes an icon for Joplin.
