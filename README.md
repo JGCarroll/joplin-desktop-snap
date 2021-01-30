@@ -55,7 +55,7 @@ If you are using an icon theme such as [`mint-y-icons`](https://github.com/linux
 
 As a workaround, you can create your own local `.desktop` file at `~/.local/share/applications$ nano joplin-james-carroll_joplin.desktop`:
 ```
-$ nano ~/.local/share/applications$ nano joplin-james-carroll_joplin.desktop
+$ nano ~/.local/share/applications/joplin-james-carroll_joplin.desktop
 ```
 Then paste the following and save:
 ```
