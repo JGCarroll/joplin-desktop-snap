@@ -48,3 +48,7 @@ Effectively this means external editors like Gedit, VSCode, Gimp, Pinta, etc, ar
 
 ## ARM support
 Joplin does not officially have ARM support and I don't have the hardware to test it in an ARM environment sufficiently, so this snap is currently X84_64 only.
+
+## The application icon doesn't change with my icon theme
+
+Unfortunately, due to limitations in the design of Snap, it isn't currently possible for individual Snap applications to support icon theming on some Linux distributions without completely breaking the application icon on others. Until this underlying issue is fixed, you can manually change individual application icons with [MenuLibre](https://github.com/bluesabre/menulibre) or something similar.
