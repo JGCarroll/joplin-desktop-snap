@@ -1,10 +1,26 @@
-[![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/joplin-james-carroll)
+[![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/joplin-desktop)
 
-This repository contains the snapcraft build files that generate a snap build of Joplin. Precompiled binaries can be downloaded at https://snapcraft.io/joplin-james-carroll or via `sudo snap install joplin-james-carroll`
+`sudo snap install joplin-desktop`
+
+This repository contains the snapcraft build files that generate a snap build of Joplin desktop.
 
 Joplins official site can be found at https://joplinapp.org/ and it's source repository at https://github.com/laurent22/joplin
 
 # FAQ
+
+## `joplin-james-carroll` -> `joplin-desktop` package migration
+
+On 02/02/21, I published a new package `joplin-desktop`. This package is functionally identical to `joplin-james-carroll`.
+
+I would like to deprecate `joplin-james-carroll`. I will continue to push updates to both package names until the users of `joplin-james-carroll` drops overtime.
+Eventually, I will unpublish `joplin-james-carroll` entirely, preventing new downloads. There's no specific time frame involved, it'll be based on usage stats.
+
+`joplin-james-carroll` will not appear in the search results of the Snap Store any longer, but can still be accessed by the package name directly. Still if you're reading this, please avoid installing it in the future.
+
+If you wish to migrate to `joplin-desktop` sooner, make use of Joplins export functionality and synchronisation capabilities. Both packages can be installed by side side, although it may look confusing due to duplicated desktop entries, after the data is migrated simply run `sudo snap remove joplin-james-carroll`.
+Keep in mind however that the packages are for the time being identical in every aspect but name, so don't feel the need to rush this process just yet.
+
+Remember, snaps are isolated. *DO NOT SIMPLY INSTALL THE NEW PACKAGE AND DELETE THE OLD PACKAGE WITHOUT ENSURING YOU CAN MIGRATE THE DATA ACROSS*, otherwise you will have to make use of snapshots below to attempt to recover the data.
 
 ## How often does the snap get rebuilt?
 
@@ -13,25 +29,22 @@ A bot should check for and build the latest stable release every night. This rel
 ## I can't access files outside of $HOME
 This is expected of snaps, they are heavily sandboxed and a snap usually cannot access files outside of $HOME. You can grant the removable-media interfaces to allow the snap to access `/mnt` and `/media`, which should allow it to access USB drives and other OS drives, provided they're under these paths.
 
-`sudo snap connect joplin-james-carroll:removable-media :removable-media`
+`sudo snap connect joplin-desktop:removable-media :removable-media`
 
 In the future, improvements in the Electron backend should facilitate accessing any filesystem without having to worry about permissions, by making use of XDG desktop portals.
 
 ## I can't print
 This is expected of snaps, they are heavily sandboxed and printer access is not usually available by default. You can enable printer access with:
 
-`sudo snap connect joplin-james-carroll:cups-control :cups-control`
+`sudo snap connect joplin-desktop:cups-control :cups-control`
+
+`sudo snap connect joplin-desktop:avahi-control :avahi-control`
 
 In the future, this permission may become obsolete by making use of XDG desktop portals.
 
-## Fonts are showing as [][][] on certain (GTK) dialogues.
-This is unfortunately a complex problem between font caches and container environments. Whilst improvements are constantly being made to alleviate this problem and most people don't experience it, for those who do there's little I can individually do to help other than to encourage you to refresh your systems font cache. The problem is not exclusive to this snap and is being tackled at an ecosystem level generally.
-
-See [here](https://forum.snapcraft.io/t/snapped-app-not-loading-fonts-on-fedora-and-arch/12484) for some background
-
 ## The snap cannot access data from a none snap install / Data is missing after removing the snap and I expected it to work with the AppImage
-Snaps cannot access hidden folders/files in the top level of $HOME. This means this snap cannot access `$HOME/.config/.joplin`, the default location of the Joplin databases.
-The database is typically located in `$HOME/snap/joplin-james-carroll/current/.config/.joplin`, and you should be able to copy this into `$HOME/.config/.joplin` completely fine. You can also access this location by clicking "open profile directory" in the tools menu.
+Snaps cannot access hidden folders/files in the top level of $HOME. This means this snap cannot access `$HOME/.config/.joplin-desktop`, the default location of the Joplin databases.
+The database is instead located in `$HOME/snap/joplin-desktop/current/.config/.joplin-desktop`, and you should be able to copy this into `$HOME/.config/.joplin-desktop` completely fine. You can also access this location by clicking "open profile directory" in the tools menu.
 
 Alternatively, consider exporting the data or synchronising it instead.
 
@@ -47,7 +60,7 @@ The functionality in the settings to specificy an editor by file location will n
 Effectively this means external editors like Gedit, VSCode, Gimp, Pinta, etc, are likely to be fine; but CLI based such as Vim may not be possible without effort on the users side to create a .desktop file manually for it.
 
 ## ARM support
-Joplin does not officially have ARM support and I don't have the hardware to test it in an ARM environment sufficiently, so this snap is currently X84_64 only.
+Joplin does not officially have ARM support and I don't have the hardware to test it in an ARM environment sufficiently, so this snap is currently X86_64 only.
 
 ## The application icon doesn't change with my icon theme
 
