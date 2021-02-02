@@ -1,4 +1,4 @@
-name: joplin-james-carroll
+name: joplin-desktop
 base: core20
 summary: A free, private note taking and to-do app!
 description: |
@@ -51,7 +51,7 @@ layout:
     bind: $SNAP/usr/share/libdrm
 
 apps:
-  joplin:
+  joplin-desktop:
     command: linux-unpacked/joplin --no-sandbox
     plugs:
       - network
