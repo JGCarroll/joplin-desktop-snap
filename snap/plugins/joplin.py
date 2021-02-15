@@ -7,12 +7,12 @@ class PluginImpl(PluginV2):
 	@classmethod
 	def get_schema(cls) -> Dict[str, Any]:
 		return {
-            "$schema": "http://json-schema.org/draft-04/schema#",
+			"$schema": "http://json-schema.org/draft-04/schema#",
 			"type": "object",
 			"additionalProperties": False,
 			"properties": {"node-version": {"type": "string"}},
 			"required": ["node-version"]
-        }
+		}
 
 	def get_build_snaps(self) -> Set[str]:
 		return set()
