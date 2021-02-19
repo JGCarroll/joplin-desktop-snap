@@ -50,6 +50,7 @@ class PluginImpl(PluginV2):
 	@staticmethod
 	def _build_commands() -> List[str]:
 		return [
+			"unset PYTHONPATH",
 			"npm cache verify",
 			"npm install",
 			"cd packages/app-desktop",
