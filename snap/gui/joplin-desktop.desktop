@@ -2,7 +2,7 @@
 Name=Joplin
 Comment=The free and private note taking app
 Exec=joplin-desktop
-Icon=${SNAP}/meta/gui/joplin.svg
+Icon=${SNAP}/meta/gui/joplin-desktop.svg
 Type=Application
 Categories=Office;
 StartupWMClass=Joplin
