@@ -28,6 +28,7 @@ parts:
       - libnss3
       - libglu1-mesa
       - libnotify4
+      - notify-send
       - libpulse0
       - libappindicator3-1
     override-pull: |
