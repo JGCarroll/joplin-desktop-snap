@@ -30,7 +30,6 @@ parts:
       - libnotify4
       - libnotify-bin
       - libpulse0
-      - libappindicator3-1
     override-pull: |
       snapcraftctl pull
       snapcraftctl set-version $(git describe --tags)
