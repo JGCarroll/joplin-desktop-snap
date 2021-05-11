@@ -1,0 +1,22 @@
+--- joplin/packages/app-desktop/commands/copyDevCommand.ts	2021-05-11 15:45:02.035566593 +0100
++++ copyDevCommand.ts	2021-05-11 16:03:04.060803187 +0100
+@@ -1,7 +1,5 @@
+ import { CommandRuntime, CommandDeclaration } from '@joplin/lib/services/CommandService';
+ import { _ } from '@joplin/lib/locale';
+-const app = require('electron').remote.app;
+-const { clipboard } = require('electron');
+ 
+ export const declaration: CommandDeclaration = {
+ 	name: 'copyDevCommand',
+@@ -11,10 +9,7 @@
+ export const runtime = (): CommandRuntime => {
+ 	return {
+ 		execute: async () => {
+-			const appPath = app.getPath('exe');
+-			const cmd = `${appPath} --env dev`;
+-			clipboard.writeText(cmd);
+-			alert(`The dev mode command has been copied to clipboard:\n\n${cmd}`);
++			alert(`This version of Joplin is packaged as a Snap, please use the AppImage version for development purposes.`);
+ 		},
+ 	};
+ };

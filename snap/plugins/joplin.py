@@ -43,8 +43,8 @@ class PluginImpl(PluginV2):
 	@staticmethod
 	def _apply_patches() -> List[str]:
 		return [
-			r"""sed -i '/function checkForUpdates/a return;' packages/app-desktop/checkForUpdates.js""",
-			r"""sed -i '/execute: async/ a alert("This instance of Joplin is in a snap package. Please use the official AppImages for development purposes"); \n return;' packages/app-desktop/commands/copyDevCommand.ts"""
+			"patch -i $SNAPCRAFT_PROJECT_DIR/patches/disable_updates.patch -p 1",
+			"patch -i $SNAPCRAFT_PROJECT_DIR/patches/hide_dev_command.patch -p 1"
 		]
 
 	@staticmethod
