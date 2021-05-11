@@ -1,0 +1,15 @@
+--- joplin/packages/lib/database.ts	2021-05-11 15:37:08.762696609 +0100
++++ database.ts	2021-05-11 20:35:59.561401713 +0100
+@@ -127,6 +127,12 @@
+ 
+ 				return result; // No exception was thrown
+ 			} catch (error) {
++				if (error && error.code == 'SQLITE_READONLY'){
++					alert("Joplin has been updated while running and must be restarted to ensure stability. Joplin will now close.");
++					const remote = require('electron').remote
++					let w = remote.getCurrentWindow()
++					w.close()
++				}
+ 				if (error && (error.code == 'SQLITE_IOERR' || error.code == 'SQLITE_BUSY')) {
+ 					if (totalWaitTime >= 20000) throw this.sqliteErrorToJsError(error, sql, params);
+ 					// NOTE: don't put logger statements here because it might log to the database, which
