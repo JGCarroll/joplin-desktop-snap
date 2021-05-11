@@ -43,8 +43,8 @@ This is expected of snaps, they are heavily sandboxed and printer access is not 
 In the future, this permission may become obsolete by making use of XDG desktop portals.
 
 ## The snap cannot access data from a none snap install / Data is missing after removing the snap and I expected it to work with the AppImage
-Snaps cannot access hidden folders/files in the top level of $HOME. This means this snap cannot access `$HOME/.config/.joplin-desktop`, the default location of the Joplin databases.
-The database is instead located in `$HOME/snap/joplin-desktop/current/.config/.joplin-desktop`, and you should be able to copy this into `$HOME/.config/.joplin-desktop` completely fine. You can also access this location by clicking "open profile directory" in the tools menu.
+Snaps cannot access hidden folders/files in the top level of $HOME. This means this snap cannot access `$HOME/.config/joplin-desktop`, the default location of the Joplin databases.
+The database is instead located in `$HOME/snap/joplin-desktop/current/.config/joplin-desktop`, and you should be able to copy this into `$HOME/.config/joplin-desktop` completely fine. You can also access this location by clicking "open profile directory" in the tools menu.
 
 Alternatively, consider exporting the data or synchronising it instead.
 
@@ -58,6 +58,8 @@ If your expected editor is not showing in the dialogue, it's likely because it d
 The functionality in the settings to specificy an editor by file location will not work because the snap won't see any other editors due to the sandboxing.
 
 Effectively this means external editors like Gedit, VSCode, Gimp, Pinta, etc, are likely to be fine; but CLI based such as Vim may not be possible without effort on the users side to create a .desktop file manually for it.
+
+If the dialogue has remembered a selection and you wish to make a change, either change the default application registered to open .md files in the native system which should prompt the snap to ask again (And change back, if desired), or run `rm $HOME/.local/share/flatpak/db/desktop-used-apps` and log in and out of the user session.
 
 ## ARM support
 Joplin does not officially have ARM support and I don't have the hardware to test it in an ARM environment sufficiently, so this snap is currently X86_64 only.
