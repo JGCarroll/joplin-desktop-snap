@@ -65,7 +65,6 @@ apps:
       - home
       - removable-media
       - password-manager-service
-      - pulseaudio
       - audio-playback
       - cups-control
       - avahi-control
