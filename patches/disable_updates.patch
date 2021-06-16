@@ -1,10 +1,10 @@
---- joplin/packages/app-desktop/checkForUpdates.js	2021-05-11 15:37:08.722696271 +0100
-+++ checkForUpdates.js	2021-05-11 15:40:24.167490499 +0100
-@@ -142,6 +142,7 @@
+--- joplin/packages/app-desktop/checkForUpdates.ts	2021-06-16 11:51:34.380323034 +0100
++++ checkForUpdates.ts	2021-06-16 11:52:07.768338904 +0100
+@@ -157,6 +157,7 @@
  }
  
- function checkForUpdates(inBackground, window, logFilePath, options) {
+ export default async function checkForUpdates(inBackground: boolean, parentWindow: any, options: CheckForUpdateOptions) {
 +	return;
  	if (isCheckingForUpdate_) {
- 		autoUpdateLogger_.info('checkForUpdates: Skipping check because it is already running');
+ 		logger.info('Skipping check because it is already running');
  		return;
