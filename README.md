@@ -51,15 +51,24 @@ Alternatively, consider exporting the data or synchronising it instead.
 If you have already deleted the snap and need to get the data, by default snaps are kept in a limbo state backed up for 31 days after being removed, so you can try to recover an automatic snapshot. Look [here](https://snapcraft.io/docs/snapshots) for help.
 
 ## External editors don't work as expected.
-Snaps exist in a heavy sandbox and can't directly open other applications. The snap should attempt to use XDK desktop portals to find suitable editors instead, and requires XDG desktop portal support in order to do so. Ensure the support is set up on your host environment and the shortcut control-e should work mostly fine.
+Snaps exist in a heavy sandbox and can't directly open other applications. The snap should attempt to use XDG desktop portals to find suitable editors instead, and requires XDG desktop portal support in order to do so. Ensure the support is set up on your host environment and the shortcut control-e should work mostly fine.
 
-If your expected editor is not showing in the dialogue, it's likely because it does not have metadata in the form of the freedesktop .desktop files, or it's metadata is incomplete, E.G, not being registered as a handler for the MIME type. KDE fares better in this regard than GTK based desktops as it shows every app if requested.
+If your expected editor is not showing in the dialog, it's likely because it does not have metadata in the form of the freedesktop `.desktop` files, or it's metadata is incomplete, e.g, not being registered as a handler for the MIME type.
 
-The functionality in the settings to specificy an editor by file location will not work because the snap won't see any other editors due to the sandboxing.
+The functionality in the settings to specifiy an editor by file location will not work because the snap won't see any other editors due to the sandboxing.
+As a special exception, the path `/usr/bin/joplin-open` can be used, which accepts an argument of ``--ask``. 
+If this combination is used, the application selection prompt will unconditionally appear for external editors the next time you attempt to use the functionality and until the `--ask` argument is removed.
+This can be used to reset the learnt preference or kept active indefinitely if preferred.
 
-Effectively this means external editors like Gedit, VSCode, Gimp, Pinta, etc, are likely to be fine; but CLI based such as Vim may not be possible without effort on the users side to create a .desktop file manually for it.
+The snap should also be aware of when the system defaults are changed and open a prompt if a change is detected.
+For example, if the default image viewer is changed, the snap should ask which image viewer to use the next time you attempt to open an image.
 
-If the dialogue has remembered a selection and you wish to make a change, either change the default application registered to open .md files in the native system which should prompt the snap to ask again (And change back, if desired), or run `rm $HOME/.local/share/flatpak/db/desktop-used-apps` and log in and out of the user session.
+In the worst case scenario, you can run the following command and log out and in again to reset the preferences for all snaps and flatpaks.
+`rm $HOME/.local/share/flatpak/db/desktop-used-apps`
+
+For advanced users, if the `flatpak` command is available you manually set specific associations. e.g, to set gedit to be the default application for markdown in the Joplin snap:
+
+`flatpak permission-set desktop-used-apps text/markdown snap.joplin-desktop org.gnome.gedit 0 3`
 
 ## ARM support
 Joplin does not officially have ARM support and I don't have the hardware to test it in an ARM environment sufficiently, so this snap is currently X86_64 only.

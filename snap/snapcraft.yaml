@@ -33,6 +33,12 @@ parts:
     override-pull: |
       snapcraftctl pull
       snapcraftctl set-version $(git describe --tags)
+  xdg-open:
+    plugin: go
+    source-type: local
+    source: ./xdg-open
+    organize:
+      bin/dbus: bin/joplin-open
   cleanup:
     plugin: nil
     build-snaps:
@@ -43,12 +49,14 @@ parts:
       for snap in "core20" "gnome-3-38-2004"; do
           cd "/snap/$snap/current" && find . -type f,l -exec rm -f "$SNAPCRAFT_PRIME/{}" \;
       done
-    after: [joplin]
+    after: [joplin, xdg-open]
 
 
 layout:
   /usr/share/libdrm:
     bind: $SNAP/usr/share/libdrm
+  /usr/bin/joplin-open:
+    symlink: $SNAP/bin/joplin-open
 
 apps:
   joplin-desktop:

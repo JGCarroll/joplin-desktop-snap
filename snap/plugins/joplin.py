@@ -45,7 +45,8 @@ class PluginImpl(PluginV2):
 		return [
 			"patch -i $SNAPCRAFT_PROJECT_DIR/patches/disable_updates.patch -p 1",
 			"patch -i $SNAPCRAFT_PROJECT_DIR/patches/hide_dev_command.patch -p 1",
-			"patch -i $SNAPCRAFT_PROJECT_DIR/patches/detect_updates.patch -p 1"
+			"patch -i $SNAPCRAFT_PROJECT_DIR/patches/detect_updates.patch -p 1",
+			"patch -i $SNAPCRAFT_PROJECT_DIR/patches/force_custom_xdg-open.patch -p 1"
 		]
 
 	@staticmethod
