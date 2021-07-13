@@ -8,13 +8,14 @@ import (
 )
 
 func openFile(path string, ask bool, writable bool) error {
+	var fd int
+
 	conn, err := dbus.SessionBus()
 	if err != nil {
 		return err
 	}
 	defer conn.Close()
 
-	var fd int
 	if writable {
 		fd, err = syscall.Open(path, syscall.O_RDWR, 0)
 	}
@@ -59,7 +60,7 @@ func main() {
 		ask = true
 		path = os.Args[2]
 	}
-	
+
 	if path == "" {
 		panic("Filepath couldn't be parsed")
 	}
@@ -73,7 +74,7 @@ func main() {
 	if err != nil {
 		err = exec.Command("snapctl", "user-open", path).Run()
 	}
-	if err != nil{
+	if err != nil {
 		panic(err)
 	}
 }
