@@ -20,7 +20,7 @@ parts:
     plugin: joplin
     node-version: 14.17.3
     source: https://github.com/laurent22/joplin.git
-    source-tag: 'v2.1.8'
+    source-tag: 'v2.1.9'
     source-depth: 1
     stage-packages:
       - libxss1
