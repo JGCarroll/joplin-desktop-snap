@@ -18,9 +18,9 @@ compression: lzo
 parts:
   joplin:
     plugin: joplin
-    node-version: 14.17.4
+    node-version: 16.6.2
     source: https://github.com/laurent22/joplin.git
-    source-tag: 'v2.2.7'
+    source-tag: 'v2.3.3'
     source-depth: 1
     stage-packages:
       - libxss1
