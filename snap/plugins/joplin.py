@@ -29,6 +29,17 @@ class PluginImpl(PluginV2):
 
 
 	@staticmethod
+	def _launchpad_proxy_workaround() -> List[str]:
+		return [
+			# ${var-} to work around potential unbound variable.
+			'if [[ -n "${http_proxy-}" ]]; then',
+				'export ELECTRON_GET_USE_PROXY=1',
+				'export GLOBAL_AGENT_HTTP_PROXY="${http_proxy}"',
+				'export GLOBAL_AGENT_HTTPS_PROXY="${http_proxy}"',
+			'fi'
+		]
+
+	@staticmethod
 	def _apply_patches() -> List[str]:
 		return [
 			"patch -i $SNAPCRAFT_PROJECT_DIR/snap/local/patches/disable_updates.patch -p 1",
@@ -51,4 +62,4 @@ class PluginImpl(PluginV2):
 		]
 
 	def get_build_commands(self) -> List[str]:
-		return self._apply_patches() + self._build_commands()
+		return self._launchpad_proxy_workaround() + self._apply_patches() + self._build_commands()
