@@ -57,7 +57,7 @@ layout:
 
 apps:
   joplin-desktop:
-    command: linux-unpacked/joplin --no-sandbox
+    command: joplin-desktop/joplin --no-sandbox
     plugs:
       - network
       - browser-support
