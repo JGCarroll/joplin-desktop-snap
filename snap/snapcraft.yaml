@@ -35,7 +35,7 @@ parts:
     source-type: local
     source: ./xdg-open
     organize:
-      bin/dbus: bin/joplin-open
+      bin/dbus: opt/joplin-open/open
   cleanup:
     plugin: nil
     build-snaps:
@@ -53,11 +53,11 @@ layout:
   /usr/share/libdrm:
     bind: $SNAP/usr/share/libdrm
   /usr/bin/joplin-open:
-    symlink: $SNAP/bin/joplin-open
+    symlink: $SNAP/opt/joplin-open/open
 
 apps:
   joplin-desktop:
-    command: joplin-desktop/joplin --no-sandbox
+    command: opt/joplin-desktop/joplin --no-sandbox
     plugs:
       - network
       - browser-support

@@ -57,8 +57,9 @@ class PluginImpl(PluginV2):
 			"cd packages/app-desktop",
 			"node_modules/.bin/electron-rebuild",
 			"node_modules/.bin/electron-builder",
-			"cp -r dist/*unpacked ${SNAPCRAFT_PART_INSTALL}/joplin-desktop",
-			"mv ${SNAPCRAFT_PART_INSTALL}/joplin-desktop/@joplinapp-desktop ${SNAPCRAFT_PART_INSTALL}/joplin-desktop/joplin"
+			"mkdir ${SNAPCRAFT_PART_INSTALL}/opt -p",
+			"cp -r dist/*unpacked ${SNAPCRAFT_PART_INSTALL}/opt/joplin-desktop",
+			"mv ${SNAPCRAFT_PART_INSTALL}/opt/joplin-desktop/@joplinapp-desktop ${SNAPCRAFT_PART_INSTALL}/opt/joplin-desktop/joplin"
 		]
 
 	def get_build_commands(self) -> List[str]:
