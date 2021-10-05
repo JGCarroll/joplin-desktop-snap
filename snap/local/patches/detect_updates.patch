@@ -1,12 +1,12 @@
---- joplin/packages/lib/database.ts	2021-08-18 10:19:17.335962691 +0100
-+++ database.ts	2021-08-18 11:06:32.094370527 +0100
-@@ -127,6 +127,10 @@
+--- joplin/packages/lib/database.ts	2021-10-01 21:47:35.120350714 +0100
++++ database.ts	2021-10-02 19:16:48.260234790 +0100
+@@ -137,6 +137,10 @@
  
  				return result; // No exception was thrown
  			} catch (error) {
 +				if (error && error.code == 'SQLITE_READONLY'){
 +					alert("Joplin has been updated while running and must be restarted to ensure stability. Joplin will now close.");
-+					require("electron").remote.app.exit(0)
++					require("@electron/remote").app.exit(0);
 +				}
  				if (error && (error.code == 'SQLITE_IOERR' || error.code == 'SQLITE_BUSY')) {
  					if (totalWaitTime >= 20000) throw this.sqliteErrorToJsError(error, sql, params);

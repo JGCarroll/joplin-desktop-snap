@@ -1,0 +1,184 @@
+diff -Naur joplin/packages/app-desktop/bridge.ts joplin-fork/packages/app-desktop/bridge.ts
+--- joplin/packages/app-desktop/bridge.ts	2021-10-31 14:57:44.665185291 +0000
++++ joplin-fork/packages/app-desktop/bridge.ts	2021-11-01 01:26:50.676578820 +0000
+@@ -1,7 +1,7 @@
+ import ElectronAppWrapper from './ElectronAppWrapper';
+ import shim from '@joplin/lib/shim';
+ import { _, setLocale } from '@joplin/lib/locale';
+-const { dirname, toSystemSlashes } = require('@joplin/lib/path-utils');
++const { toSystemSlashes } = require('@joplin/lib/path-utils');
+ const { BrowserWindow, nativeTheme } = require('electron');
+ 
+ interface LastSelectedPath {
+@@ -125,29 +125,23 @@
+ 		return this.window().webContents.closeDevTools();
+ 	}
+ 
+-	showSaveDialog(options: any) {
++	async showSaveDialog(options: any) {
+ 		const { dialog } = require('electron');
+ 		if (!options) options = {};
+ 		if (!('defaultPath' in options) && this.lastSelectedPaths_.file) options.defaultPath = this.lastSelectedPaths_.file;
+-		const filePath = dialog.showSaveDialogSync(this.window(), options);
+-		if (filePath) {
+-			this.lastSelectedPaths_.file = filePath;
+-		}
+-		return filePath;
++		const result = await dialog.showSaveDialog(this.window(), options);
++		return result.filePath;
+ 	}
+ 
+-	showOpenDialog(options: any = null) {
++	async showOpenDialog(options: any = null) {
+ 		const { dialog } = require('electron');
+ 		if (!options) options = {};
+ 		let fileType = 'file';
+ 		if (options.properties && options.properties.includes('openDirectory')) fileType = 'directory';
+ 		if (!('defaultPath' in options) && this.lastSelectedPaths_[fileType]) options.defaultPath = this.lastSelectedPaths_[fileType];
+ 		if (!('createDirectory' in options)) options.createDirectory = true;
+-		const filePaths = dialog.showOpenDialogSync(this.window(), options);
+-		if (filePaths && filePaths.length) {
+-			this.lastSelectedPaths_[fileType] = dirname(filePaths[0]);
+-		}
+-		return filePaths;
++		const result = await dialog.showOpenDialog(this.window(), options);
++		return result.filePaths;
+ 	}
+ 
+ 	// Don't use this directly - call one of the showXxxxxxxMessageBox() instead
+diff -Naur joplin/packages/app-desktop/gui/ConfigScreen/ConfigScreen.tsx joplin-fork/packages/app-desktop/gui/ConfigScreen/ConfigScreen.tsx
+--- joplin/packages/app-desktop/gui/ConfigScreen/ConfigScreen.tsx	2021-10-31 14:57:44.669181311 +0000
++++ joplin-fork/packages/app-desktop/gui/ConfigScreen/ConfigScreen.tsx	2021-11-01 01:36:46.283567485 +0000
+@@ -481,8 +481,8 @@
+ 					updateSettingValue(key, joinCmd(cmd));
+ 				};
+ 
+-				const browseButtonClick = () => {
+-					const paths = bridge().showOpenDialog();
++				const browseButtonClick = async () => {
++					const paths = await bridge().showOpenDialog();
+ 					if (!paths || !paths.length) return;
+ 					const cmd = splitCmd(this.state.settings[key]);
+ 					cmd[0] = paths[0];
+diff -Naur joplin/packages/app-desktop/gui/ConfigScreen/controls/plugins/PluginsStates.tsx joplin-fork/packages/app-desktop/gui/ConfigScreen/controls/plugins/PluginsStates.tsx
+--- joplin/packages/app-desktop/gui/ConfigScreen/controls/plugins/PluginsStates.tsx	2021-10-31 14:57:44.669181311 +0000
++++ joplin-fork/packages/app-desktop/gui/ConfigScreen/controls/plugins/PluginsStates.tsx	2021-11-01 01:31:11.735665657 +0000
+@@ -181,7 +181,7 @@
+ 	}, [pluginSettings, props.onChange]);
+ 
+ 	const onInstall = useCallback(async () => {
+-		const result = bridge().showOpenDialog({
++		const result = await bridge().showOpenDialog({
+ 			filters: [{ name: 'Joplin Plugin Archive', extensions: ['jpl'] }],
+ 		});
+ 
+diff -Naur joplin/packages/app-desktop/gui/KeymapConfig/KeymapConfigScreen.tsx joplin-fork/packages/app-desktop/gui/KeymapConfig/KeymapConfigScreen.tsx
+--- joplin/packages/app-desktop/gui/KeymapConfig/KeymapConfigScreen.tsx	2021-10-31 14:57:44.669181311 +0000
++++ joplin-fork/packages/app-desktop/gui/KeymapConfig/KeymapConfigScreen.tsx	2021-11-01 02:20:28.655145585 +0000
+@@ -50,7 +50,7 @@
+ 	};
+ 
+ 	const handleImport = async () => {
+-		const filePath = bridge().showOpenDialog({
++		const filePath = await bridge().showOpenDialog({
+ 			properties: ['openFile'],
+ 			defaultPath: 'keymap-desktop',
+ 			filters: [{ name: 'Joplin Keymaps (keymap-desktop.json)', extensions: ['json'] }],
+@@ -68,7 +68,7 @@
+ 	};
+ 
+ 	const handleExport = async () => {
+-		const filePath = bridge().showSaveDialog({
++		const filePath = await bridge().showSaveDialog({
+ 			defaultPath: 'keymap-desktop',
+ 			filters: [{ name: 'Joplin Keymaps (keymap-desktop.json)', extensions: ['json'] }],
+ 		});
+diff -Naur joplin/packages/app-desktop/gui/MainScreen/commands/exportPdf.ts joplin-fork/packages/app-desktop/gui/MainScreen/commands/exportPdf.ts
+--- joplin/packages/app-desktop/gui/MainScreen/commands/exportPdf.ts	2021-10-31 14:57:44.669181311 +0000
++++ joplin-fork/packages/app-desktop/gui/MainScreen/commands/exportPdf.ts	2021-11-01 02:20:44.619284009 +0000
+@@ -20,12 +20,12 @@
+ 
+ 				let path = null;
+ 				if (noteIds.length === 1) {
+-					path = bridge().showSaveDialog({
++					path = await bridge().showSaveDialog({
+ 						filters: [{ name: _('PDF File'), extensions: ['pdf'] }],
+ 						defaultPath: await InteropServiceHelper.defaultFilename(noteIds[0], 'pdf'),
+ 					});
+ 				} else {
+-					path = bridge().showOpenDialog({
++					path = await bridge().showOpenDialog({
+ 						properties: ['openDirectory', 'createDirectory'],
+ 					});
+ 				}
+diff -Naur joplin/packages/app-desktop/gui/MenuBar.tsx joplin-fork/packages/app-desktop/gui/MenuBar.tsx
+--- joplin/packages/app-desktop/gui/MenuBar.tsx	2021-10-31 14:57:44.669181311 +0000
++++ joplin-fork/packages/app-desktop/gui/MenuBar.tsx	2021-11-01 02:21:30.215682474 +0000
+@@ -180,11 +180,11 @@
+ 		let path = null;
+ 
+ 		if (moduleSource === 'file') {
+-			path = bridge().showOpenDialog({
++			path = await bridge().showOpenDialog({
+ 				filters: [{ name: module.description, extensions: module.fileExtensions }],
+ 			});
+ 		} else {
+-			path = bridge().showOpenDialog({
++			path = await bridge().showOpenDialog({
+ 				properties: ['openDirectory', 'createDirectory'],
+ 			});
+ 		}
+diff -Naur joplin/packages/app-desktop/gui/NoteEditor/utils/contextMenu.ts joplin-fork/packages/app-desktop/gui/NoteEditor/utils/contextMenu.ts
+--- joplin/packages/app-desktop/gui/NoteEditor/utils/contextMenu.ts	2021-10-31 14:57:44.673177334 +0000
++++ joplin-fork/packages/app-desktop/gui/NoteEditor/utils/contextMenu.ts	2021-11-01 02:16:58.281383987 +0000
+@@ -107,7 +107,7 @@
+ 			label: _('Save as...'),
+ 			onAction: async (options: ContextMenuOptions) => {
+ 				const { resourcePath, resource } = await resourceInfo(options);
+-				const filePath = bridge().showSaveDialog({
++				const filePath = await bridge().showSaveDialog({
+ 					defaultPath: resource.filename ? resource.filename : resource.title,
+ 				});
+ 				if (!filePath) return;
+diff -Naur joplin/packages/app-desktop/gui/NoteEditor/utils/resourceHandling.ts joplin-fork/packages/app-desktop/gui/NoteEditor/utils/resourceHandling.ts
+--- joplin/packages/app-desktop/gui/NoteEditor/utils/resourceHandling.ts	2021-10-31 14:57:44.673177334 +0000
++++ joplin-fork/packages/app-desktop/gui/NoteEditor/utils/resourceHandling.ts	2021-11-01 02:20:13.511014824 +0000
+@@ -65,7 +65,7 @@
+ 	};
+ 
+ 	if (!filePaths) {
+-		filePaths = bridge().showOpenDialog({
++		filePaths = await bridge().showOpenDialog({
+ 			properties: ['openFile', 'createDirectory', 'multiSelections'],
+ 		});
+ 		if (!filePaths || !filePaths.length) return null;
+diff -Naur joplin/packages/app-desktop/gui/StatusScreen/StatusScreen.tsx joplin-fork/packages/app-desktop/gui/StatusScreen/StatusScreen.tsx
+--- joplin/packages/app-desktop/gui/StatusScreen/StatusScreen.tsx	2021-10-31 14:57:44.673177334 +0000
++++ joplin-fork/packages/app-desktop/gui/StatusScreen/StatusScreen.tsx	2021-11-01 02:15:17.776593297 +0000
+@@ -25,7 +25,7 @@
+ async function exportDebugReportClick() {
+ 	const filename = `syncReport-${new Date().getTime()}.csv`;
+ 
+-	const filePath = bridge().showSaveDialog({
++	const filePath = await bridge().showSaveDialog({
+ 		title: _('Please select where the sync status should be exported to'),
+ 		defaultPath: filename,
+ 	});
+diff -Naur joplin/packages/app-desktop/InteropServiceHelper.ts joplin-fork/packages/app-desktop/InteropServiceHelper.ts
+--- joplin/packages/app-desktop/InteropServiceHelper.ts	2021-10-31 14:57:44.665185291 +0000
++++ joplin-fork/packages/app-desktop/InteropServiceHelper.ts	2021-11-01 01:57:35.997952544 +0000
+@@ -153,12 +153,12 @@
+ 
+ 		if (module.target === 'file') {
+ 			const noteId = options.sourceNoteIds && options.sourceNoteIds.length ? options.sourceNoteIds[0] : null;
+-			path = bridge().showSaveDialog({
++			path = await bridge().showSaveDialog({
+ 				filters: [{ name: module.description, extensions: module.fileExtensions }],
+ 				defaultPath: await this.defaultFilename(noteId, module.fileExtensions[0]),
+ 			});
+ 		} else {
+-			path = bridge().showOpenDialog({
++			path = await bridge().showOpenDialog({
+ 				properties: ['openDirectory', 'createDirectory'],
+ 			});
+ 		}

@@ -43,9 +43,10 @@ class PluginImpl(PluginV2):
 	def _apply_patches() -> List[str]:
 		return [
 			"patch -i $SNAPCRAFT_PROJECT_DIR/snap/local/patches/disable_updates.patch -p 1",
-			"patch -i $SNAPCRAFT_PROJECT_DIR/snap/local/patches/hide_dev_command.patch -p 1",
+			"patch -i $SNAPCRAFT_PROJECT_DIR/snap/local/patches/fix_dev_command.patch -p 1",
 			"patch -i $SNAPCRAFT_PROJECT_DIR/snap/local/patches/detect_updates.patch -p 1",
-			"patch -i $SNAPCRAFT_PROJECT_DIR/snap/local/patches/force_custom_xdg-open.patch -p 1"
+			"patch -i $SNAPCRAFT_PROJECT_DIR/snap/local/patches/force_custom_xdg-open.patch -p 1",
+			"patch -i $SNAPCRAFT_PROJECT_DIR/snap/local/patches/force_asynchronous_file_dialog.patch -p 1"
 		]
 
 	@staticmethod
@@ -55,7 +56,7 @@ class PluginImpl(PluginV2):
 			"npm cache verify",
 			"npm install",
 			"cd packages/app-desktop",
-			"node_modules/.bin/electron-rebuild",
+			"node_modules/.bin/electron-rebuild --force-abi 89",
 			"node_modules/.bin/electron-builder",
 			"mkdir ${SNAPCRAFT_PART_INSTALL}/opt -p",
 			"cp -r dist/*unpacked ${SNAPCRAFT_PART_INSTALL}/opt/joplin-desktop",

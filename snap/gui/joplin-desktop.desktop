@@ -6,3 +6,4 @@ Icon=${SNAP}/meta/gui/joplin-desktop.svg
 Type=Application
 Categories=Office;
 StartupWMClass=Joplin
+MimeType=x-scheme-handler/joplin;

@@ -17,7 +17,7 @@ parts:
   joplin:
     plugin: joplin
     source: https://github.com/laurent22/joplin.git
-    source-tag: 'v2.4.9'
+    source-tag: 'v2.5.8'
     source-depth: 1
     stage-packages:
       - libxss1
@@ -30,12 +30,14 @@ parts:
     override-pull: |
       snapcraftctl pull
       snapcraftctl set-version $(git describe --tags)
+
   xdg-open:
     plugin: go
     source-type: local
     source: ./xdg-open
     organize:
       bin/dbus: opt/joplin-open/open
+
   cleanup:
     plugin: nil
     build-snaps:
@@ -75,5 +77,4 @@ apps:
       - avahi-control
     extensions: [gnome-3-38]
     environment:
-      DISABLE_WAYLAND: 1
       TMPDIR: ${XDG_RUNTIME_DIR}
