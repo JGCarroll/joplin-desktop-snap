@@ -17,7 +17,7 @@ parts:
   joplin:
     plugin: joplin
     source: https://github.com/laurent22/joplin.git
-    source-tag: 'v2.5.8'
+    source-tag: 'v2.5.10'
     source-depth: 1
     stage-packages:
       - libxss1
