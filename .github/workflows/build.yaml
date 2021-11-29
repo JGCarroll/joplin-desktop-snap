@@ -1,22 +1,36 @@
-name: Automatically build this repository on new commits
+name: Build and Deploy
+
 on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Name of the Git branch to build.'     
+        required: true
+        default: 'master'
+      release-channel:
+        description: 'Channel on the Snap Store to push to (e.g: latest/stable/bug-fix)'
+        required: true
+        default: 'latest/beta'
   push:
     branches:
       - master
-  workflow_dispatch:
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: snapcore/action-build@v1
-        id: build
-      - uses: snapcore/action-publish@v1
-        with:
-          store_login: ${{ secrets.STORE_LOGIN }}
-          snap: ${{ steps.build.outputs.snap }}
-          release: candidate
-      - uses: actions/upload-artifact@v2
-        with:
-          name: 'snap'
-          path: ${{ steps.build.outputs.snap}}
+    - uses: actions/checkout@v2
+      with:
+        ref:  ${{ github.event.inputs.branch || 'master' }}
+    - uses: snapcore/action-build@v1
+      id: build
+    - uses: actions/upload-artifact@v2
+      with:
+        name: 'joplin-desktop.snap'
+        path: ${{ steps.build.outputs.snap}}
+    - uses: snapcore/action-publish@v1
+      with:
+        store_login: ${{ secrets.STORE_LOGIN }}
+        snap: ${{ steps.build.outputs.snap }}
+        release: ${{ github.event.inputs.release-channel || 'latest/beta' }}
+
