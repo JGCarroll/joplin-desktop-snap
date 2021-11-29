@@ -16,7 +16,7 @@ class PluginImpl(PluginV2):
 		return {"node/16/stable"}
 
 	def get_build_packages(self) -> Set[str]:
-		return {"python", "rsync", "libsecret-1-dev", "curl"}
+		return {"python", "rsync", "libsecret-1-dev", "curl", "build-essential"}
 
 	def get_build_environment(self) -> Dict[str, str]:
 		return dict(
