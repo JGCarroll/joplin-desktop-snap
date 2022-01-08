@@ -25,6 +25,9 @@ You can grant the removable-media interfaces to allow the snap to access `/mnt` 
 sudo snap connect joplin-desktop:removable-media
 ```
 
+If the `xdg-desktop-portals` package is installed, GUI filepickers will be able to access arbitrary files on the system.
+(Folder selection via the xdg-portals requires Ubuntu 21.04+, Debian 11, etc).
+
 ## I can't print
 This is expected of snaps, they are heavily sandboxed and printer access is not usually available by default.
 You can enable printer access with:
