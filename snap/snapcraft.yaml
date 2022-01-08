@@ -35,7 +35,7 @@ parts:
     source-type: local
     source: ./xdg-open
     organize:
-      bin/dbus: opt/joplin-open/open
+      bin/dbus: bin/xdg-open
 
   cleanup:
     plugin: nil
@@ -53,8 +53,6 @@ parts:
 layout:
   /usr/share/libdrm:
     bind: $SNAP/usr/share/libdrm
-  /usr/bin/joplin-open:
-    symlink: $SNAP/opt/joplin-open/open
 
 apps:
   joplin-desktop:
@@ -77,3 +75,4 @@ apps:
     extensions: [gnome-3-38]
     environment:
       TMPDIR: ${XDG_RUNTIME_DIR}
+      PATH: ${SNAP}/bin:${PATH}

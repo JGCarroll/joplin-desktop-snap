@@ -45,7 +45,6 @@ class PluginImpl(PluginV2):
 			"patch -i $SNAPCRAFT_PROJECT_DIR/snap/local/patches/disable_updates.patch -p 1",
 			"patch -i $SNAPCRAFT_PROJECT_DIR/snap/local/patches/fix_dev_command.patch -p 1",
 			"patch -i $SNAPCRAFT_PROJECT_DIR/snap/local/patches/detect_updates.patch -p 1",
-			"patch -i $SNAPCRAFT_PROJECT_DIR/snap/local/patches/force_custom_xdg-open.patch -p 1"
 		]
 
 	@staticmethod
