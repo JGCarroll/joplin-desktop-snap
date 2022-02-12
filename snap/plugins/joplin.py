@@ -13,10 +13,10 @@ class PluginImpl(PluginV2):
 		}
 
 	def get_build_snaps(self) -> Set[str]:
-		return {"node/16/stable"}
+		return set()
 
 	def get_build_packages(self) -> Set[str]:
-		return {"python", "rsync", "libsecret-1-dev", "curl", "build-essential"}
+		return {"python", "rsync", "libsecret-1-dev", "curl", "build-essential", "nodejs"}
 
 	def get_build_environment(self) -> Dict[str, str]:
 		return dict(
@@ -52,11 +52,10 @@ class PluginImpl(PluginV2):
 	def _build_commands() -> List[str]:
 		return [
 			"unset PYTHONPATH",
-			"npm cache verify",
-			"npm install",
+			"corepack enable",
+			"yarn install",
 			"cd packages/app-desktop",
-			"node_modules/.bin/electron-rebuild --force-abi 89",
-			"node_modules/.bin/electron-builder",
+			"yarn run dist",
 			"mkdir ${SNAPCRAFT_PART_INSTALL}/opt -p",
 			"cp -r dist/*unpacked ${SNAPCRAFT_PART_INSTALL}/opt/joplin-desktop",
 			"mv ${SNAPCRAFT_PART_INSTALL}/opt/joplin-desktop/@joplinapp-desktop ${SNAPCRAFT_PART_INSTALL}/opt/joplin-desktop/joplin"

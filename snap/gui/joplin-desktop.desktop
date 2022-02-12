@@ -7,3 +7,4 @@ Type=Application
 Categories=Office;
 StartupWMClass=Joplin
 MimeType=x-scheme-handler/joplin;
+SingleMainWindow=true

@@ -13,11 +13,18 @@ license: MIT
 adopt-info: joplin
 compression: lzo
 
+package-repositories:
+  - type: apt
+    url: https://deb.nodesource.com/node_16.x
+    components: [main]
+    suites: [focal]
+    key-id: 9FD3B784BC1C6FC31A8A0A1C1655A0AB68576280
+
 parts:
   joplin:
     plugin: joplin
     source: https://github.com/laurent22/joplin.git
-    source-commit: 98fba37cd3b1ada547f7910c792b79debda5c51d # 2.6.10
+    source-commit: 105a61c1eec1fd307698c4bfdd490f0d4a26852e # 2.7.11
     stage-packages:
       - libxss1
       - libnspr4
