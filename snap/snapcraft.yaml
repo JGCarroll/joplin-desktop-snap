@@ -24,7 +24,7 @@ parts:
   joplin:
     plugin: joplin
     source: https://github.com/laurent22/joplin.git
-    source-commit: 5b5165dbcd3a0d207fafa87faa33b17578c4dea9 # 2.7.13
+    source-commit: 75cc9d7f9be824ede452a35ee34b73fc63878c67 # 2.7.14
     stage-packages:
       - libxss1
       - libnspr4
