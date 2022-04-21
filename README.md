@@ -28,20 +28,6 @@ sudo snap connect joplin-desktop:removable-media
 If the `xdg-desktop-portals` package is installed, GUI filepickers will be able to access arbitrary files on the system.
 (Folder selection via the xdg-portals requires Ubuntu 21.04+, Debian 11, etc).
 
-## I can't print
-This is expected of snaps, they are heavily sandboxed and printer access is not usually available by default.
-You can enable printer access with:
-
-```bash
-sudo snap connect joplin-desktop:cups-control
-```
-
-```bash
-sudo snap connect joplin-desktop:avahi-control
-```
-
-This will soon become unnecessary with improvements to the printing support in snapd.
-
 ## The snap cannot access data from a none snap installation
 Snaps cannot access hidden folders/files in the top level of `$HOME`. 
 This means this snap cannot access `$HOME/.config/joplin-desktop`, the default location of the Joplin databases.

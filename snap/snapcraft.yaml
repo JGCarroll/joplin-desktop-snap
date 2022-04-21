@@ -61,24 +61,28 @@ layout:
   /usr/share/libdrm:
     bind: $SNAP/usr/share/libdrm
 
+plugs:
+  private-shmem:
+    interface: shared-memory
+    private: true
+  network:
+  browser-support:
+  opengl:
+  desktop:
+  desktop-legacy:
+  unity7:
+  wayland:
+  x11:
+  home:
+  removable-media:
+  password-manager-service:
+  audio-playback:
+  cups:
+  avahi-control:
+
 apps:
   joplin-desktop:
     command: opt/joplin-desktop/joplin --no-sandbox
-    plugs:
-      - network
-      - browser-support
-      - opengl
-      - desktop
-      - desktop-legacy
-      - unity7
-      - wayland
-      - x11
-      - home
-      - removable-media
-      - password-manager-service
-      - audio-playback
-      - cups-control
-      - avahi-control
     extensions: [gnome-3-38]
     environment:
       TMPDIR: ${XDG_RUNTIME_DIR}
