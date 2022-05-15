@@ -13,10 +13,10 @@ class PluginImpl(PluginV2):
 		}
 
 	def get_build_snaps(self) -> Set[str]:
-		return set()
+		return {"node/16/stable"}
 
 	def get_build_packages(self) -> Set[str]:
-		return {"python", "rsync", "libsecret-1-dev", "curl", "build-essential", "nodejs"}
+		return {"python", "rsync", "libsecret-1-dev", "curl", "build-essential"}
 
 	def get_build_environment(self) -> Dict[str, str]:
 		return dict(
@@ -52,7 +52,6 @@ class PluginImpl(PluginV2):
 	def _build_commands() -> List[str]:
 		return [
 			"unset PYTHONPATH",
-			"corepack enable",
 			"yarn install",
 			"cd packages/app-desktop",
 			"yarn run dist",

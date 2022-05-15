@@ -12,19 +12,14 @@ confinement: strict
 license: MIT
 adopt-info: joplin
 compression: lzo
-
-package-repositories:
-  - type: apt
-    url: https://deb.nodesource.com/node_16.x
-    components: [main]
-    suites: [focal]
-    key-id: 9FD3B784BC1C6FC31A8A0A1C1655A0AB68576280
+assumes:
+  - snapd2.55.4
 
 parts:
   joplin:
     plugin: joplin
     source: https://github.com/laurent22/joplin.git
-    source-commit: 75cc9d7f9be824ede452a35ee34b73fc63878c67 # 2.7.14
+    source-commit: 91d786ddbef10e9b0c0c24f3ebd05de24c14fa20 # 2.8.7
     stage-packages:
       - libxss1
       - libnspr4
