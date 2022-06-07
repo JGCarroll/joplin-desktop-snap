@@ -13,13 +13,13 @@ license: MIT
 adopt-info: joplin
 compression: lzo
 assumes:
-  - snapd2.55.4
+  - snapd2.55.5
 
 parts:
   joplin:
     plugin: joplin
     source: https://github.com/laurent22/joplin.git
-    source-commit: 91d786ddbef10e9b0c0c24f3ebd05de24c14fa20 # 2.8.7
+    source-commit: c2a6a13eb46550a1d024261ed8db39ea98a4497a # 2.8.8
     stage-packages:
       - libxss1
       - libnspr4
