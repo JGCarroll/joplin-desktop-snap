@@ -1,5 +1,5 @@
 name: joplin-desktop
-base: core20
+base: core22
 summary: A free, private note taking and to-do app!
 description: |
   Joplin is an open source, free note taking application. Designed to be capable of replacing Evernote, Joplin is privacy conscious and can be be used without signing up for an account, but optionally supports synchronising your files with a file host of your choice and with optional end to end encryption.
@@ -17,44 +17,49 @@ assumes:
 
 parts:
   joplin:
-    plugin: joplin
+    plugin: nil
     source: https://github.com/laurent22/joplin.git
     source-commit: a84a8e7710980f2d3c4f0bfabf8fb87876f2536a # 2.9.17
+    build-environment:
+      -  SUDO_UID: 0
+      -  SUDO_GID: 0
+      -  SUDO_USER: root
+      -  npm_config_prefer_offline: true
+    build-packages:
+      - build-essential
+      - python2
+      - rsync
+      - libsecret-1-dev
+      - curl
+    build-snaps:
+      - node/16/stable
     stage-packages:
-      - libxss1
-      - libnspr4
-      - libnss3
-      - libglu1-mesa
-      - libnotify4
       - libnotify-bin
-      - libpulse0
     override-pull: |
-      snapcraftctl pull
-      snapcraftctl set-version $(git describe --tags)
+      craftctl default
+      craftctl set version=$(git describe --tags)
+      for file in ${CRAFT_PROJECT_DIR}/snap/local/patches/*
+      do
+        patch -i $file -p 1
+      done
+    override-build: |
+      ln -s /usr/bin/python2 /usr/bin/python
+      unset PYTHONPATH
+      yarn install
+      cd ${CRAFT_PART_BUILD}/packages/app-desktop
+      yarn run dist
+      mkdir ${CRAFT_PART_INSTALL}/opt -p
+      cp -r dist/*unpacked ${CRAFT_PART_INSTALL}/opt/joplin-desktop
+      mv ${CRAFT_PART_INSTALL}/opt/joplin-desktop/@joplinapp-desktop ${CRAFT_PART_INSTALL}/opt/joplin-desktop/joplin
 
   xdg-open:
     plugin: go
     source-type: local
     source: ./xdg-open
+    build-snaps:
+      - go
     organize:
       bin/dbus: bin/xdg-open
-
-  cleanup:
-    plugin: nil
-    build-snaps:
-      - core20
-      - gnome-3-38-2004
-    override-prime: |
-      set -eux
-      for snap in "core20" "gnome-3-38-2004"; do
-          cd "/snap/$snap/current" && find . -type f,l -exec rm -f "$SNAPCRAFT_PRIME/{}" \;
-      done
-    after: [joplin, xdg-open]
-
-
-layout:
-  /usr/share/libdrm:
-    bind: $SNAP/usr/share/libdrm
 
 plugs:
   private-shmem:
@@ -78,7 +83,7 @@ plugs:
 apps:
   joplin-desktop:
     command: opt/joplin-desktop/joplin --no-sandbox
-    extensions: [gnome-3-38]
+    extensions: [gnome]
     environment:
       TMPDIR: ${XDG_RUNTIME_DIR}
       PATH: ${SNAP}/bin:${PATH}
