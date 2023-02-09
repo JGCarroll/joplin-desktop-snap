@@ -78,7 +78,6 @@ plugs:
   password-manager-service:
   audio-playback:
   cups:
-  avahi-control:
 
 apps:
   joplin-desktop:
