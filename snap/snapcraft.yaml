@@ -9,7 +9,7 @@ description: |
   Snap build: https://github.com/MrCarroll/joplin-snap
 grade: stable
 confinement: strict
-license: MIT
+license: AGPL-3.0-or-later
 adopt-info: joplin
 compression: lzo
 assumes:
@@ -19,7 +19,7 @@ parts:
   joplin:
     plugin: nil
     source: https://github.com/laurent22/joplin.git
-    source-commit: a84a8e7710980f2d3c4f0bfabf8fb87876f2536a # 2.9.17
+    source-commit: 9645414c171b99eff4e07f1a897eff04742cf631 # 2.10.13
     build-environment:
       -  SUDO_UID: 0
       -  SUDO_GID: 0
@@ -38,7 +38,7 @@ parts:
     override-pull: |
       craftctl default
       craftctl set version=$(git describe --tags)
-      for file in ${CRAFT_PROJECT_DIR}/snap/local/patches/*
+      for file in ${CRAFT_PROJECT_DIR}/snap/local/patches/*.patch
       do
         patch -i $file -p 1
       done
