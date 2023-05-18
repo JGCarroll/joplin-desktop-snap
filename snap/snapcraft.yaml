@@ -12,8 +12,6 @@ confinement: strict
 license: AGPL-3.0-or-later
 adopt-info: joplin
 compression: lzo
-assumes:
-  - snapd2.55.5
 
 parts:
   joplin:
