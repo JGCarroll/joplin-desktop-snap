@@ -3,9 +3,9 @@ base: core22
 summary: A free, private note taking and to-do app!
 description: |
   Joplin is an open source, free note taking application. Designed to be capable of replacing Evernote, Joplin is privacy conscious and can be be used without signing up for an account, but optionally supports synchronising your files with a file host of your choice and with optional end to end encryption.
-  
+
   Developer site: https://joplinapp.org/
-  
+
   Snap build: https://github.com/MrCarroll/joplin-snap
 grade: stable
 confinement: strict
