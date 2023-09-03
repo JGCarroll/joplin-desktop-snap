@@ -58,6 +58,17 @@ parts:
       - go
     organize:
       bin/dbus: bin/xdg-open
+  cleanup:
+    plugin: nil
+    build-snaps:
+      - core22
+      - gnome-42-2204
+    override-prime: |
+      set -eux
+      for snap in "core22" "gnome-42-2204"; do
+          cd "/snap/$snap/current" && find . -type f,l -exec rm -f "$SNAPCRAFT_PRIME/{}" \;
+      done
+    after: [joplin, xdg-open]
 
 plugs:
   private-shmem:
