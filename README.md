@@ -68,9 +68,3 @@ e.g, to set Gedit to be the default application for markdown in the Joplin snap:
 ```bash
 flatpak permission-set desktop-used-apps text/markdown snap.joplin-desktop org.gnome.gedit 0 3
 ```
-
-## ARM support
-This snap builds fine on arm64 but isn't currently distributed for it.
-This may change in the future as I evaluate options for building and testing.
-Until then, you may prefer to build locally.
-Alternatively, the [Flatpak](https://github.com/flathub/net.cozic.joplin_desktop) build of Joplin has arm64 builds.
