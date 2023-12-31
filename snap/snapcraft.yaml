@@ -40,6 +40,7 @@ parts:
       do
         patch -i $file -p 1
       done
+      git cherry-pick 3b4eb16110e503f7401feacde52ed521fbfeb3b0
     override-build: |
       if [ -n "$http_proxy" ]; then # Sorts out network proxy issues on Launchpad builds
         export ELECTRON_GET_USE_PROXY=1
