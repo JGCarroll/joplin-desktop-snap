@@ -2,10 +2,7 @@ name: Basic build test
 
 on:
   push:
-    branches:
-      - master
-  pull_request:
-
+  pull-request:
 
 jobs:
   build:
@@ -16,5 +13,5 @@ jobs:
       id: build
     - uses: actions/upload-artifact@v4
       with:
-        name: '${{ github.sha }}.snap'
+        name: '${{ artifact-id }}.snap'
         path: ${{ steps.build.outputs.snap}}
