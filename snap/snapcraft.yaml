@@ -63,8 +63,6 @@ parts:
     source: ./xdg-open
     build-snaps:
       - go
-    organize:
-      bin/dbus: bin/xdg-open
 
   cleanup:
     plugin: nil
