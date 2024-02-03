@@ -65,6 +65,7 @@ parts:
       - go
     organize:
       bin/dbus: bin/xdg-open
+
   cleanup:
     plugin: nil
     build-snaps:
