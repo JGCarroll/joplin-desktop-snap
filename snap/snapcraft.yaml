@@ -81,19 +81,6 @@ plugs:
   private-shmem:
     interface: shared-memory
     private: true
-  network:
-  browser-support:
-  opengl:
-  desktop:
-  desktop-legacy:
-  unity7:
-  wayland:
-  x11:
-  home:
-  removable-media:
-  password-manager-service:
-  audio-playback:
-  cups:
 
 apps:
   joplin-desktop:
@@ -102,3 +89,18 @@ apps:
     environment:
       TMPDIR: ${XDG_RUNTIME_DIR}
       PATH: ${SNAP}/bin:${PATH}
+    plugs:
+      - private-shmem
+      - network
+      - browser-support
+      - opengl
+      - desktop
+      - desktop-legacy
+      - unity7
+      - wayland
+      - x11
+      - home
+      - removable-media
+      - password-manager-service
+      - audio-playback
+      - cups
