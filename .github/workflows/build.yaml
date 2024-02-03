@@ -16,5 +16,5 @@ jobs:
       id: build
     - uses: actions/upload-artifact@v4
       with:
-        name: '${{ vars.GITHUB_SHA }}.snap'
+        name: '${{ github.sha }}.snap'
         path: ${{ steps.build.outputs.snap}}
