@@ -5,6 +5,7 @@ import (
 	"os"
 	"os/exec"
 	"syscall"
+	"fmt"
 )
 
 func openFile(path string, ask bool, writable bool) error {
@@ -43,11 +44,18 @@ func main() {
 	var ask bool
 	var path string
 
+        if os.Getenv("SNAP") == "" {
+                fmt.Println("Not running in expected snap environment, refusing to operate")
+                return
+        }
+
 	if len(os.Args) == 1 {
-		panic("No arguments passed")
+		fmt.Println("No arguments passed")
+		return
 	}
 	if len(os.Args) > 3 {
-		panic("Too many arguments passed")
+		fmt.Println("Too many arguments passed")
+		return
 	}
 	if len(os.Args) == 2 {
 		path = os.Args[1]
@@ -62,7 +70,8 @@ func main() {
 	}
 
 	if path == "" {
-		panic("Filepath couldn't be parsed")
+		fmt.Println("Filepath couldn't be parsed")
+		return
 	}
 
 	err := openFile(path, ask, true)
@@ -75,6 +84,7 @@ func main() {
 		err = exec.Command("snapctl", "user-open", path).Run()
 	}
 	if err != nil {
-		panic(err)
+		fmt.Println(err)
+		return
 	}
 }
