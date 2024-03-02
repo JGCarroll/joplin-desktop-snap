@@ -1,0 +1,17 @@
+diff -Naur joplin/packages/lib/services/plugins/defaultPlugins/desktopDefaultPluginsInfo.ts joplin-patched/packages/lib/services/plugins/defaultPlugins/desktopDefaultPluginsInfo.ts
+--- joplin/packages/lib/services/plugins/defaultPlugins/desktopDefaultPluginsInfo.ts	2024-03-02 17:30:55.053656002 +0000
++++ joplin-patched/packages/lib/services/plugins/defaultPlugins/desktopDefaultPluginsInfo.ts	2024-03-02 17:48:30.893516947 +0000
+@@ -1,12 +1,11 @@
+ import { DefaultPluginsInfo } from '../PluginService';
+-import Setting from '../../../models/Setting';
+ import shim from '../../../shim';
+ 
+ const getDefaultPluginsInfo = (): DefaultPluginsInfo => {
+ 	const defaultPlugins = {
+ 		'io.github.jackgruber.backup': {
+ 			settings: {
+-				'path': `${Setting.value('homeDir')}`,
++				'path': process.env.SNAP_USER_COMMON,
+ 				'createSubfolderPerProfile': true,
+ 			},
+ 
