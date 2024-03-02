@@ -1,0 +1,26 @@
+diff -Naur joplin/packages/app-desktop/gui/MenuBar.tsx joplin-patched/packages/app-desktop/gui/MenuBar.tsx
+--- joplin/packages/app-desktop/gui/MenuBar.tsx	2024-03-02 12:44:32.974341571 +0000
++++ joplin-patched/packages/app-desktop/gui/MenuBar.tsx	2024-03-02 12:53:48.334267598 +0000
+@@ -588,7 +588,7 @@
+ 					},
+ 				}, {
+ 					label: _('Check for updates...'),
+-					visible: !!shim.isMac(),
++					visible: false,
+ 					click: () => _checkForUpdates(),
+ 				}, {
+ 					type: 'separator',
+diff -Naur joplin/packages/lib/models/Setting.ts joplin-patched/packages/lib/models/Setting.ts
+--- joplin/packages/lib/models/Setting.ts	2024-03-02 12:44:33.074341559 +0000
++++ joplin-patched/packages/lib/models/Setting.ts	2024-03-02 12:55:16.954256082 +0000
+@@ -1383,8 +1383,8 @@
+ 			},
+ 
+ 
+-			autoUpdateEnabled: { value: true, type: SettingItemType.Bool, storage: SettingStorage.File, isGlobal: true, section: 'application', public: platform !== 'linux', appTypes: [AppType.Desktop], label: () => _('Automatically check for updates') },
+-			'autoUpdate.includePreReleases': { value: false, type: SettingItemType.Bool, section: 'application', storage: SettingStorage.File, isGlobal: true, public: true, appTypes: [AppType.Desktop], label: () => _('Get pre-releases when checking for updates'), description: () => _('See the pre-release page for more details: %s', 'https://joplinapp.org/help/about/prereleases') },
++			autoUpdateEnabled: { value: true, type: SettingItemType.Bool, storage: SettingStorage.File, isGlobal: true, section: 'application', public: false, appTypes: [AppType.Desktop], label: () => _('Automatically check for updates') },
++			'autoUpdate.includePreReleases': { value: false, type: SettingItemType.Bool, section: 'application', storage: SettingStorage.File, isGlobal: true, public: false, appTypes: [AppType.Desktop], label: () => _('Get pre-releases when checking for updates'), description: () => _('See the pre-release page for more details: %s', 'https://joplinapp.org/help/about/prereleases') },
+ 
+ 			'autoUploadCrashDumps': {
+ 				value: false,

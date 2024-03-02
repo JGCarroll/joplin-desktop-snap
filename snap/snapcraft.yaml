@@ -17,7 +17,7 @@ parts:
   joplin:
     plugin: nil
     source: https://github.com/laurent22/joplin.git
-    source-commit: 7d2c1c08ed9f319542da47ff3b85b2b6829d4425 # 2.13.15
+    source-commit: 094175c0670f4935e4ab5cb7c216d1789941ff50 # 2.14.17
     build-environment:
       -  SUDO_UID: "0"
       -  SUDO_GID: "0"
@@ -30,7 +30,7 @@ parts:
       - libsecret-1-dev
       - curl
     build-snaps:
-      - node/16/stable
+      - node/20/stable
     stage-packages:
       - libnotify-bin
     override-pull: |
