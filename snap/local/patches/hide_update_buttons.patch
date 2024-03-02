@@ -1,7 +1,7 @@
 diff -Naur joplin/packages/app-desktop/gui/MenuBar.tsx joplin-patched/packages/app-desktop/gui/MenuBar.tsx
 --- joplin/packages/app-desktop/gui/MenuBar.tsx	2024-03-02 12:44:32.974341571 +0000
-+++ joplin-patched/packages/app-desktop/gui/MenuBar.tsx	2024-03-02 12:53:48.334267598 +0000
-@@ -588,7 +588,7 @@
++++ joplin-patched/packages/app-desktop/gui/MenuBar.tsx	2024-03-02 13:32:54.168637427 +0000
+@@ -588,11 +588,11 @@
  					},
  				}, {
  					label: _('Check for updates...'),
@@ -10,6 +10,20 @@ diff -Naur joplin/packages/app-desktop/gui/MenuBar.tsx joplin-patched/packages/a
  					click: () => _checkForUpdates(),
  				}, {
  					type: 'separator',
+-					visible: !!shim.isMac(),
++					visible: false,
+ 				},
+ 				shim.isMac() ? noItem : newNoteItem,
+ 				shim.isMac() ? noItem : newTodoItem,
+@@ -879,7 +879,7 @@
+ 						click() { void bridge().openExternal('https://joplinapp.org/donate/'); },
+ 					}, {
+ 						label: _('Check for updates...'),
+-						visible: !shim.isMac(),
++						visible: false,
+ 						click: () => _checkForUpdates(),
+ 					},
+ 					separator(),
 diff -Naur joplin/packages/lib/models/Setting.ts joplin-patched/packages/lib/models/Setting.ts
 --- joplin/packages/lib/models/Setting.ts	2024-03-02 12:44:33.074341559 +0000
 +++ joplin-patched/packages/lib/models/Setting.ts	2024-03-02 12:55:16.954256082 +0000
