@@ -19,10 +19,10 @@ parts:
     source: https://github.com/laurent22/joplin.git
     source-commit: 971c4e5e841728b632efc78ea812caad40524606 # 2.14.19
     build-environment:
-      -  SUDO_UID: "0"
-      -  SUDO_GID: "0"
-      -  SUDO_USER: "root"
-      -  npm_config_prefer_offline: "true"
+      - SUDO_UID: "0"
+      - SUDO_GID: "0"
+      - SUDO_USER: "root"
+      - npm_config_prefer_offline: "true"
     build-packages:
       - build-essential
       - python2
