@@ -2,9 +2,95 @@ name: joplin-desktop
 base: core22
 summary: A free, private note taking and to-do app!
 description: |
-  Joplin is an open source, free note taking application.
-  Designed to be capable of replacing Evernote, Joplin is privacy conscious and can be be used without signing up for an account.
-  Joplin optionally supports synchronising your files with a file host of your choice and with optional end to end encryption.
+  **The quick details**
+
+  Joplin is an open source, **free** note taking application.
+
+  **Privacy** is an actively prioritised aspect of the design.
+
+  Functionality is mostly comparable to Evernote, of which Joplin can import from and is designed to replace.
+
+  Joplin supports synchronising your data with a file host of your choice with **end to end encryption**.
+
+  **Is there a cost?**
+
+  No, all functionality is capable of being used for free on publically available platforms like OneDrive or Dropbox's free tiers.
+
+  And to be clear, you don't have to use online services at all.
+   You can turn off the network access permissions in the system settings.
+  Features such as Optical Character Recognition (OCR) function offline.
+
+  **Core details**
+
+  * Notes are formatted in Markdown
+  * Swap to using the exclusive Rich Text Editor mode to hide the clutter, if you don't want Markdown
+  * HTML can be used for additional flair
+  * PDF's can be attached to notes with built-in, offline OCR
+  * Tables
+  * Pictures
+  * Mermaid diagrams
+  * Katex
+  * Handwritten notes via mobile touchscreens (using Joplin Mobile)
+  * Optical Character Recognition
+  * These core features are supported across all platforms, everything is still free, use as many devices with as many notes as your host allows
+
+  **Some special highlights**
+
+  * Reminders
+  * Web Browser clipper extension, to import content from Firefox, Chrome, etc
+  * Plugins!
+
+  **Use cases**
+
+  * A highly efficient shopping list, with attached receipts
+  * Technical documentation for your internal network
+  * Collection of topics on your university thesis
+  * A to-do list that can set reminders and travel with you
+  * Keep all your tax statements, invoices, and organised insurance documents
+  * A cookbook
+  * A diary
+  * A journal
+  * Store memes
+
+  **What if I need my data?**
+
+  * Your notes can be exported back to their original formats at any point, for manipulation with backup tools and such
+  * Notes can also be reimported back into Joplin at any time
+  * By keeping everything as Markdown internally (with some optional dashes of HTML if users insist), the Joplin format is intrinsically future proofed and capable of being used in other software
+
+  **Plugins**
+
+  An actively growing plugin developer community is flourishing, allowing Joplin to be customised further with community driven enhancements.
+  * Music Sheets
+  * Hugo Export (Joplin builds a static website!)
+  * Themes (in addition to the built in themes)
+  * Integration into Visual Studio Code
+  * Kanban Boards
+  * Templates
+  * Bibtex
+
+  Browse public plugins: https://joplinapp.org/plugins
+
+  Make your own plugins: https://joplinapp.org/help/api/get_started/plugins
+
+  **Software license**
+
+  AGPL3.0 - You can distribute and use this however you like, for free, within the open source spirit.
+
+  **Support the project**
+
+  Users can support Joplin development by subscribing to Joplin's own Joplin Cloud product,
+  offering a natively supported, cloud storage provider for Joplin's sync functionality,
+  with some unique extras such as sharing notebooks online,
+  or an email inbox that allows you to send emails and convert them directly into notes.
+
+  You can also self host this at home, for free!
+  Your support is welcome, but Joplin will always be free.
+
+  **Get help**
+  * https://discourse.joplinapp.org
+  * https://joplinapp.org/help
+  * https://google.com
 
 grade: stable
 confinement: strict
