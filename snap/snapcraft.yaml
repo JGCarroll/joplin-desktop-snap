@@ -1,5 +1,5 @@
 name: joplin-desktop
-base: core22
+base: core24
 summary: A free, private note taking and to-do app!
 description: |
   **The quick details**
@@ -110,12 +110,10 @@ parts:
       - npm_config_prefer_offline: "true"
     build-packages:
       - build-essential
-      - python2
       - rsync
       - libsecret-1-dev
       - curl
-    build-snaps:
-      - node/20/stable
+      - npm
     stage-packages:
       - libnotify-bin
     override-pull: |
@@ -133,8 +131,7 @@ parts:
         export YARN_HTTP_PROXY="${http_proxy:-}"
         export YARN_HTTPS_PROXY="${http_proxy:-}"
       fi
-      ln -s /usr/bin/python2 /usr/bin/python
-      unset PYTHONPATH
+      npm install --global yarn
       yarn install
       cd ${CRAFT_PART_BUILD}/packages/app-desktop
       yarn run dist
@@ -152,11 +149,11 @@ parts:
   cleanup:
     plugin: nil
     build-snaps:
-      - core22
-      - gnome-42-2204
+      - core24
+      - gnome-46-2404
     override-prime: |
       set -eux
-      for snap in "core22" "gnome-42-2204"; do
+      for snap in "core24" "gnome-46-2404"; do
           cd "/snap/$snap/current" && find . -type f,l -exec rm -f "$SNAPCRAFT_PRIME/{}" \;
       done
     after: [joplin, xdg-open]
