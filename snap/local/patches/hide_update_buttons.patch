@@ -1,7 +1,7 @@
 diff -Naur joplin/packages/app-desktop/gui/MenuBar.tsx joplin-patched/packages/app-desktop/gui/MenuBar.tsx
---- joplin/packages/app-desktop/gui/MenuBar.tsx	2024-03-02 12:44:32.974341571 +0000
-+++ joplin-patched/packages/app-desktop/gui/MenuBar.tsx	2024-03-02 13:32:54.168637427 +0000
-@@ -588,11 +588,11 @@
+--- joplin/packages/app-desktop/gui/MenuBar.tsx	2024-09-17 19:35:40.521070764 +0100
++++ joplin-patched/packages/app-desktop/gui/MenuBar.tsx	2024-09-17 21:41:39.947316275 +0100
+@@ -620,11 +620,11 @@
  					},
  				}, {
  					label: _('Check for updates...'),
@@ -15,7 +15,7 @@ diff -Naur joplin/packages/app-desktop/gui/MenuBar.tsx joplin-patched/packages/a
  				},
  				shim.isMac() ? noItem : newNoteItem,
  				shim.isMac() ? noItem : newTodoItem,
-@@ -879,7 +879,7 @@
+@@ -915,7 +915,7 @@
  						click() { void bridge().openExternal('https://joplinapp.org/donate/'); },
  					}, {
  						label: _('Check for updates...'),
@@ -24,17 +24,3 @@ diff -Naur joplin/packages/app-desktop/gui/MenuBar.tsx joplin-patched/packages/a
  						click: () => _checkForUpdates(),
  					},
  					separator(),
-diff -Naur joplin/packages/lib/models/Setting.ts joplin-patched/packages/lib/models/Setting.ts
---- joplin/packages/lib/models/Setting.ts	2024-03-02 12:44:33.074341559 +0000
-+++ joplin-patched/packages/lib/models/Setting.ts	2024-03-02 12:55:16.954256082 +0000
-@@ -1383,8 +1383,8 @@
- 			},
- 
- 
--			autoUpdateEnabled: { value: true, type: SettingItemType.Bool, storage: SettingStorage.File, isGlobal: true, section: 'application', public: platform !== 'linux', appTypes: [AppType.Desktop], label: () => _('Automatically check for updates') },
--			'autoUpdate.includePreReleases': { value: false, type: SettingItemType.Bool, section: 'application', storage: SettingStorage.File, isGlobal: true, public: true, appTypes: [AppType.Desktop], label: () => _('Get pre-releases when checking for updates'), description: () => _('See the pre-release page for more details: %s', 'https://joplinapp.org/help/about/prereleases') },
-+			autoUpdateEnabled: { value: true, type: SettingItemType.Bool, storage: SettingStorage.File, isGlobal: true, section: 'application', public: false, appTypes: [AppType.Desktop], label: () => _('Automatically check for updates') },
-+			'autoUpdate.includePreReleases': { value: false, type: SettingItemType.Bool, section: 'application', storage: SettingStorage.File, isGlobal: true, public: false, appTypes: [AppType.Desktop], label: () => _('Get pre-releases when checking for updates'), description: () => _('See the pre-release page for more details: %s', 'https://joplinapp.org/help/about/prereleases') },
- 
- 			'autoUploadCrashDumps': {
- 				value: false,
