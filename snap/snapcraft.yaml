@@ -154,7 +154,7 @@ parts:
       - gnome-46-2404
     override-prime: |
       set -eux
-      for snap in "core24" "gnome-46-2404"; do
+      for snap in "core24" "gnome-46-2404" "mesa-2404"; do
           cd "/snap/$snap/current" && find . -type f,l -exec rm -f "$SNAPCRAFT_PRIME/{}" \;
       done
     after: [joplin, xdg-open]
