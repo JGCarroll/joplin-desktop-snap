@@ -108,7 +108,7 @@ parts:
       - SUDO_GID: "0"
       - SUDO_USER: "root"
       - npm_config_prefer_offline: "true"
-      - YARN_ENABLE_INLINE_BUILDS: '1'
+      - YARN_ENABLE_INLINE_BUILDS: "1"
     build-packages:
       - build-essential
       - rsync
