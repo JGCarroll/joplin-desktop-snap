@@ -10,13 +10,6 @@ Joplins official site can be found [here](https://joplinapp.org/) and its source
 
 # FAQ
 
-## `joplin-james-carroll` -> `joplin-desktop` package migration
-
-There's an older, deprecated version of this package that currently still recieves updates, `joplin-james-carroll`.
-I would prefer that people transition to `joplin-desktop` over time in order to ease future maintainence.
-Since this is not possible to do in an automated fashion, I'll be monitoring the usage stats of the older package.
-When usage is low enough, the older package will stop serving new downloads and updates will cease.
-
 ## I can't access files outside of $HOME
 This is expected of snaps, they are heavily sandboxed and a snap usually cannot access files outside of $HOME. 
 You can grant the removable-media interfaces to allow the snap to access `/mnt` and `/media`.
