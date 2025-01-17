@@ -1,0 +1,13 @@
+diff -Naur joplin/packages/app-desktop/package.json joplin-patched/packages/app-desktop/package.json
+--- joplin/packages/app-desktop/package.json	2025-01-11 22:39:20.706046841 +0000
++++ joplin-patched/packages/app-desktop/package.json	2025-01-18 06:44:46.746474826 +0000
+@@ -119,8 +119,7 @@
+         "MimeType": "x-scheme-handler/joplin;"
+       },
+       "target": [
+-        "AppImage",
+-        "deb"
++        "AppImage"
+       ],
+       "executableName": "joplin",
+       "maintainer": "Joplin Team <no-reply@joplinapp.org>",

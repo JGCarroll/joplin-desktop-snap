@@ -102,19 +102,21 @@ parts:
   joplin:
     plugin: nil
     source: https://github.com/laurent22/joplin.git
-    source-commit: d58126484a585ce69e015571b33cdfb23abf7d42 # 3.1.24
+    source-commit: 2fba1013338fc30426d2648c0c6149d22dfbbd07 # 3.2.11
     build-environment:
       - SUDO_UID: "0"
       - SUDO_GID: "0"
       - SUDO_USER: "root"
       - npm_config_prefer_offline: "true"
       - YARN_ENABLE_INLINE_BUILDS: "1"
+      - IS_CONTINUOUS_INTEGRATION: "1" # OneNote Converter
     build-packages:
       - build-essential
       - rsync
       - libsecret-1-dev
       - curl
       - npm
+      - rustup # OneNote Converter
     stage-packages:
       - libnotify-bin
     override-pull: |
@@ -132,13 +134,13 @@ parts:
         export YARN_HTTP_PROXY="${http_proxy:-}"
         export YARN_HTTPS_PROXY="${http_proxy:-}"
       fi
+      rustup default stable # Prepare Rust environment for OneNote Converter
       npm install --global yarn
       yarn install
       cd ${CRAFT_PART_BUILD}/packages/app-desktop
       yarn run dist
       mkdir ${CRAFT_PART_INSTALL}/opt -p
       cp -r dist/*unpacked ${CRAFT_PART_INSTALL}/opt/joplin-desktop
-      mv ${CRAFT_PART_INSTALL}/opt/joplin-desktop/@joplinapp-desktop ${CRAFT_PART_INSTALL}/opt/joplin-desktop/joplin
 
   xdg-open:
     plugin: go

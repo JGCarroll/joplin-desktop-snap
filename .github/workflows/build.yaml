@@ -1,17 +1,22 @@
-name: Basic build test
+name: Build the snap for X86_64 & ARM64
 
 on:
   push:
   pull_request:
+  workflow_dispatch:
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  Build:
+    strategy:
+      fail-fast: false
+      matrix:
+        runner: [ubuntu-latest, ubuntu-24.04-arm]
+    runs-on: ${{ matrix.runner }}
     steps:
     - uses: actions/checkout@v4
-    - uses: snapcore/action-build@v1
+    - uses: canonical/action-build@v1
       id: build
     - uses: actions/upload-artifact@v4
       with:
-        name: '${{ github.sha }}.snap'
+        name: '${{ github.sha }}_${{ matrix.runner }}.snap'
         path: ${{ steps.build.outputs.snap}}
