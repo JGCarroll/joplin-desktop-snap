@@ -183,4 +183,5 @@ apps:
       - home
       - removable-media
       - audio-playback
+      - audio-record
       - cups
