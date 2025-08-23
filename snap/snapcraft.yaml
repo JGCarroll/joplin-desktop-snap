@@ -102,7 +102,7 @@ parts:
   joplin:
     plugin: nil
     source: https://github.com/laurent22/joplin.git
-    source-commit: 4128061e406759a928ad7d65dbcb865ddec43b70 # 3.4.6
+    source-commit: 66d52c90a3452fa7a5647df8fd3389fc5e524dbe # 3.4.7
     build-environment:
       - SUDO_UID: "0"
       - SUDO_GID: "0"
@@ -122,6 +122,7 @@ parts:
     override-pull: |
       craftctl default
       craftctl set version=$(git describe --tags)
+      git revert 37422f316eae8202e7709ec4554bc5e6ad3b6a40 # For the 3.4 series, keep using Electron 37
       for file in ${CRAFT_PROJECT_DIR}/snap/local/patches/*.patch
       do
         patch -i $file -p 1
