@@ -122,7 +122,6 @@ parts:
     override-pull: |
       craftctl default
       craftctl set version=$(git describe --tags)
-      git revert 37422f316eae8202e7709ec4554bc5e6ad3b6a40 # For the 3.4 series, keep using Electron 37
       for file in ${CRAFT_PROJECT_DIR}/snap/local/patches/*.patch
       do
         patch -i $file -p 1
