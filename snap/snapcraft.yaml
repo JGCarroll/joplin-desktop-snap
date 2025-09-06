@@ -184,3 +184,4 @@ apps:
       - audio-playback
       - audio-record
       - cups
+      - camera
