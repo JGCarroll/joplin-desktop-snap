@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/godbus/dbus/v5"
+	"github.com/godbus/dbus"
 	"os"
 	"os/exec"
 	"syscall"
