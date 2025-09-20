@@ -5,6 +5,6 @@ Exec=joplin-desktop %u
 Icon=${SNAP}/meta/gui/joplin-desktop.svg
 Type=Application
 Categories=Office;
-StartupWMClass=Joplin
+StartupWMClass=@joplin/app-desktop
 MimeType=x-scheme-handler/joplin;
 SingleMainWindow=true
