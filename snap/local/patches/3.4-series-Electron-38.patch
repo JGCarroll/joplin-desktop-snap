@@ -1,18 +1,27 @@
 diff -Naur joplin/packages/app-desktop/package.json joplin-patched/packages/app-desktop/package.json
---- joplin/packages/app-desktop/package.json	2025-09-12 02:25:53.876423231 +0100
-+++ joplin-patched/packages/app-desktop/package.json	2025-09-12 08:10:20.241162252 +0100
+--- joplin/packages/app-desktop/package.json	2025-09-15 22:11:45.291900795 +0100
++++ joplin-patched/packages/app-desktop/package.json	2025-09-15 22:47:47.157338078 +0100
 @@ -160,7 +160,7 @@
      "compare-versions": "6.1.1",
      "countable": "3.0.1",
      "debounce": "1.2.1",
 -    "electron": "35.7.5",
-+    "electron": "38.1.0",
++    "electron": "38.2.0",
      "electron-builder": "24.13.3",
      "electron-updater": "6.6.2",
      "electron-window-state": "5.0.3",
 diff -Naur joplin/yarn.lock joplin-patched/yarn.lock
---- joplin/yarn.lock	2025-09-12 02:25:53.932934944 +0100
-+++ joplin-patched/yarn.lock	2025-09-12 08:11:43.845690489 +0100
+--- joplin/yarn.lock	2025-09-15 22:11:45.357912188 +0100
++++ joplin-patched/yarn.lock	2025-09-15 22:49:03.787863934 +0100
+@@ -9163,7 +9163,7 @@
+     compare-versions: "npm:6.1.1"
+     countable: "npm:3.0.1"
+     debounce: "npm:1.2.1"
+-    electron: "npm:35.7.5"
++    electron: "38.2.0"
+     electron-builder: "npm:24.13.3"
+     electron-updater: "npm:6.6.2"
+     electron-window-state: "npm:5.0.3"
 @@ -24348,16 +24348,16 @@
    languageName: node
    linkType: hard
@@ -20,9 +29,9 @@ diff -Naur joplin/yarn.lock joplin-patched/yarn.lock
 -"electron@npm:35.7.5":
 -  version: 35.7.5
 -  resolution: "electron@npm:35.7.5"
-+"electron@npm:38.1.0":
-+  version: 38.1.0
-+  resolution: "electron@npm:38.1.0"
++"electron@npm:38.2.0":
++  version: 38.2.0
++  resolution: "electron@npm:38.2.0"
    dependencies:
      "@electron/get": "npm:^2.0.0"
      "@types/node": "npm:^22.7.7"
@@ -30,7 +39,7 @@ diff -Naur joplin/yarn.lock joplin-patched/yarn.lock
    bin:
      electron: cli.js
 -  checksum: 10/f3757f0b6f21ddd5ebf8b83becdaa3e47dc13473e5375e6e6aee638d7029e73d08d6a4170b37ad8c594057da139e7cdf4c8b82b70c2c1ad0306abdcc274c5fee
-+  checksum: 10/af70863af514b7a0ab929ef06db2d826ee83a6fcb4628b3599cf5160bcd943215874cd8b6f5f23fb336f22659bbc38c3735199cbf62852841928080ed0228849
++  checksum: 10/37d107aafeb9ba6f5f10b00893efa6c13ff6193aaf66dbaec9ce8336193fcdc68da0d0c82544fe63da5c5d82b3d23a0bb3d4de40cbdbdb8d1120c6c0bafdb3d2
    languageName: node
    linkType: hard
  
