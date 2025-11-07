@@ -41,11 +41,6 @@ Ensure the support is set up on your host  (e.g, installing an `xdg-desktop-port
 
 If your expected editor is not showing in the dialog, it's likely because it does not have metadata in the form of the freedesktop `.desktop` files, or it's metadata is incomplete, e.g, not being registered as a handler for the MIME type.
 
-The functionality in the settings to specifiy an editor by file location will not work because the snap won't see any other editors due to the sandboxing.
-As a special exception, the path `xdg-open` can be used, which accepts an argument of ``--ask``. 
-If this combination is used, the application selection prompt will unconditionally appear for external editors the next time you attempt to use the functionality and until the `--ask` argument is removed.
-This can be used to reset the learnt preference or kept active indefinitely if preferred.
-
 The snap should also be aware of when the system defaults are changed and open a prompt if a change is detected.
 For example, if the default image viewer is changed, the snap should ask which image viewer to use the next time you attempt to open an image.
 

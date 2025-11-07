@@ -142,13 +142,6 @@ parts:
       mkdir ${CRAFT_PART_INSTALL}/opt -p
       cp -r dist/*unpacked ${CRAFT_PART_INSTALL}/opt/joplin-desktop
 
-  xdg-open:
-    plugin: go
-    source-type: local
-    source: ./xdg-open
-    build-snaps:
-      - go
-
   cleanup:
     plugin: nil
     build-snaps:
@@ -160,7 +153,7 @@ parts:
       for snap in "core24" "gnome-46-2404" "mesa-2404"; do
           cd "/snap/$snap/current" && find . -type f,l -exec rm -f "$SNAPCRAFT_PRIME/{}" \;
       done
-    after: [joplin, xdg-open]
+    after: [joplin]
 
 plugs:
   private-shmem:
@@ -173,7 +166,6 @@ apps:
     extensions: [gnome]
     environment:
       TMPDIR: ${XDG_RUNTIME_DIR}
-      PATH: ${SNAP}/bin:${PATH}
     plugs:
       - private-shmem
       - network
