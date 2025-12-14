@@ -122,6 +122,7 @@ parts:
     override-pull: |
       craftctl default
       craftctl set version=$(git describe --tags)
+      git cherry-pick -X theirs 0ccd7e474d24469733b79f809f643be008944897
       for file in ${CRAFT_PROJECT_DIR}/snap/local/patches/*.patch
       do
         patch -i $file -p 1
