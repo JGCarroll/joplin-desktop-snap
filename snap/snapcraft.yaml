@@ -117,8 +117,6 @@ parts:
       - curl
       - npm
       - rustup # OneNote Converter
-    stage-packages:
-      - libnotify-bin
     override-pull: |
       craftctl default
       craftctl set version=$(git describe --tags)
