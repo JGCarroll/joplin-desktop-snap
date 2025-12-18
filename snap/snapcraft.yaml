@@ -141,19 +141,6 @@ parts:
       mkdir ${CRAFT_PART_INSTALL}/opt -p
       cp -r dist/*unpacked ${CRAFT_PART_INSTALL}/opt/joplin-desktop
 
-  cleanup:
-    plugin: nil
-    build-snaps:
-      - core24
-      - gnome-46-2404
-      - mesa-2404
-    override-prime: |
-      set -eux
-      for snap in "core24" "gnome-46-2404" "mesa-2404"; do
-          cd "/snap/$snap/current" && find . -type f,l -exec rm -f "$SNAPCRAFT_PRIME/{}" \;
-      done
-    after: [joplin]
-
 plugs:
   private-shmem:
     interface: shared-memory
