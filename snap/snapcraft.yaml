@@ -102,7 +102,7 @@ parts:
   joplin:
     plugin: nil
     source: https://github.com/laurent22/joplin.git
-    source-commit: e9a9f6856885cd796236e92b803ea66f5c652363 # 3.4.12
+    source-commit: e75875c1b0c91574df66d7f61aa88594326a824a # 3.5.11
     build-environment:
       - SUDO_UID: "0"
       - SUDO_GID: "0"
@@ -120,7 +120,6 @@ parts:
     override-pull: |
       craftctl default
       craftctl set version=$(git describe --tags)
-      git cherry-pick -X theirs 0ccd7e474d24469733b79f809f643be008944897
       for file in ${CRAFT_PROJECT_DIR}/snap/local/patches/*.patch
       do
         patch -i $file -p 1
