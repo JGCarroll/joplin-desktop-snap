@@ -102,7 +102,7 @@ parts:
   joplin:
     plugin: nil
     source: https://github.com/laurent22/joplin.git
-    source-commit: 0c1511f39eb26a48fffc5dfe87370fbf36b43e65 # 3.5.13
+    source-commit: 722e22f31eb433c03ee338f7b7137b71fb9ccc44 # 3.6.10
     build-environment:
       - SUDO_UID: "0"
       - SUDO_GID: "0"
@@ -115,8 +115,9 @@ parts:
       - rsync
       - libsecret-1-dev
       - curl
-      - npm
-      - rustup # OneNote Converter
+    build-snaps:
+      - node/24/stable
+      - rustup
     override-pull: |
       craftctl default
       craftctl set version=$(git describe --tags)
@@ -133,7 +134,6 @@ parts:
         export YARN_HTTPS_PROXY="${http_proxy:-}"
       fi
       rustup default stable # Prepare Rust environment for OneNote Converter
-      npm install --global yarn
       yarn install
       cd ${CRAFT_PART_BUILD}/packages/app-desktop
       yarn run dist

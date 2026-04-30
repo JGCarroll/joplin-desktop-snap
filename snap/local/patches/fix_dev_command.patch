@@ -1,6 +1,6 @@
 diff -Naur joplin/packages/app-desktop/commands/copyDevCommand.ts joplin-patched/packages/app-desktop/commands/copyDevCommand.ts
---- joplin/packages/app-desktop/commands/copyDevCommand.ts	2025-01-11 22:39:20.645638271 +0000
-+++ joplin-patched/packages/app-desktop/commands/copyDevCommand.ts	2025-01-12 00:19:04.535121885 +0000
+--- joplin/packages/app-desktop/commands/copyDevCommand.ts	2026-04-30 10:44:07.092676812 +0000
++++ joplin-patched/packages/app-desktop/commands/copyDevCommand.ts	2026-04-30 10:50:27.775205853 +0000
 @@ -1,7 +1,6 @@
  import { CommandRuntime, CommandDeclaration } from '@joplin/lib/services/CommandService';
  import { _ } from '@joplin/lib/locale';
@@ -15,6 +15,6 @@ diff -Naur joplin/packages/app-desktop/commands/copyDevCommand.ts joplin-patched
  		execute: async () => {
 -			const appPath = app.getPath('exe');
 +			const appPath = process.env.SNAP_INSTANCE_NAME;
- 			const cmd = `${appPath} --env dev`;
+ 			// Quote the path so it works when it contains spaces (e.g. "C:\Program Files\Joplin\Joplin.exe" on Windows)
+ 			const cmd = `"${appPath}" --env dev`;
  			clipboard.writeText(cmd);
- 			await shim.showMessageBox(`The dev mode command has been copied to clipboard:\n\n${cmd}`, { type: MessageBoxType.Info });
