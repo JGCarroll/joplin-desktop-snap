@@ -1,12 +1,12 @@
 diff -Naur joplin/packages/app-desktop/commands/copyDevCommand.ts joplin-patched/packages/app-desktop/commands/copyDevCommand.ts
---- joplin/packages/app-desktop/commands/copyDevCommand.ts	2026-04-30 10:44:07.092676812 +0000
-+++ joplin-patched/packages/app-desktop/commands/copyDevCommand.ts	2026-04-30 10:50:27.775205853 +0000
+--- joplin/packages/app-desktop/commands/copyDevCommand.ts	2026-07-20 09:42:20.370166350 +0100
++++ joplin-patched/packages/app-desktop/commands/copyDevCommand.ts	2026-07-20 09:44:40.754228502 +0100
 @@ -1,7 +1,6 @@
  import { CommandRuntime, CommandDeclaration } from '@joplin/lib/services/CommandService';
  import { _ } from '@joplin/lib/locale';
  import shim, { MessageBoxType } from '@joplin/lib/shim';
--const app = require('@electron/remote').app;
- const { clipboard } = require('electron');
+-import { app } from '@electron/remote';
+ import { clipboard } from 'electron';
  
  export const declaration: CommandDeclaration = {
 @@ -12,7 +11,7 @@
