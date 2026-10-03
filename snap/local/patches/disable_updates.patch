@@ -1,10 +1,28 @@
---- joplin/packages/app-desktop/checkForUpdates.ts	2021-06-16 11:51:34.380323034 +0100
-+++ checkForUpdates.ts	2021-06-16 11:52:07.768338904 +0100
-@@ -157,6 +157,7 @@
- }
+diff -Naur joplin/packages/app-desktop/checkForUpdates.ts joplin-patched/packages/app-desktop/checkForUpdates.ts
+--- joplin/packages/app-desktop/checkForUpdates.ts	2026-10-03 09:21:00.380883931 +0100
++++ joplin-patched/packages/app-desktop/checkForUpdates.ts	2026-10-03 09:25:09.112743517 +0100
+@@ -73,6 +73,7 @@
  
+ // eslint-disable-next-line @typescript-eslint/no-explicit-any -- parentWindow is passed to bridge().showMessageBox but the bridge signature no longer accepts a window arg; tightening would expose a pre-existing call-site mismatch (logic change)
  export default async function checkForUpdates(inBackground: boolean, parentWindow: any, options: CheckForUpdateOptions) {
 +	return;
  	if (isCheckingForUpdate_) {
  		logger.info('Skipping check because it is already running');
  		return;
+diff -Naur joplin/packages/app-desktop/gui/MenuBar.tsx joplin-patched/packages/app-desktop/gui/MenuBar.tsx
+--- joplin/packages/app-desktop/gui/MenuBar.tsx	2026-10-03 09:21:00.389842779 +0100
++++ joplin-patched/packages/app-desktop/gui/MenuBar.tsx	2026-10-03 09:26:30.324637173 +0100
+@@ -599,11 +599,11 @@
+ 					},
+ 				}, {
+ 					label: _('Check for updates...'),
+-					visible: !!shim.isMac(),
++					visible: false,
+ 					click: () => _checkForUpdates(),
+ 				}, {
+ 					type: 'separator',
+-					visible: !!shim.isMac(),
++					visible: false,
+ 				},
+ 				shim.isMac() ? noItem : newNoteItem,
+ 				shim.isMac() ? noItem : newTodoItem,
