@@ -102,7 +102,7 @@ parts:
   joplin:
     plugin: nil
     source: https://github.com/laurent22/joplin.git
-    source-commit: c54b0fb444f08b2d299d85e58f977f67c220bd83 # 3.7.23
+    source-commit: 20301fdae662c52eae22ba6b2f008e83a00fd5bf # 3.7.24
     build-environment:
       - SUDO_UID: "0"
       - SUDO_GID: "0"
